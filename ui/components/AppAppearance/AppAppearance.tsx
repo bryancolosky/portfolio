@@ -11,6 +11,7 @@ import React, {
   useMemo,
   memo
 } from 'react';
+import 'animate.css';
 
 // 🔩 Components
 

@@ -34,8 +34,8 @@ export interface GoogleMapsContextValue {
 export const GoogleMapsContext =
   React.createContext<GoogleMapsContextValue | null>(null);
 
-// const API_KEY = process.env.GOOGLE_MAPS_API_KEY as string;
-const API_KEY = 'AIzaSyDst8ZNEf0eYpN0AutpvaVsza7Y60iuCGY';
+const API_KEY = process.env.GOOGLE_MAPS_API_KEY as string;
+
 const MapTypeId = {
   HYBRID: 'hybrid',
   ROADMAP: 'roadmap',
