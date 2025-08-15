@@ -110,5 +110,5 @@ const Template: Story = {
 export const BaseTemplate: Story = {
   ...Template,
   name: '↪ Template',
-  args: { animation: true }
+  args: { animate: true }
 };

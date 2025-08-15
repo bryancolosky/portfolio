@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 const Template: Story = {
   render: ({ ...args }) => {
     return (
-      <Page animation={true}>
+      <Page animate={true}>
         <Page.Cover {...args}>
           <Text variant="lead" element="p">
             Check out my{' '}

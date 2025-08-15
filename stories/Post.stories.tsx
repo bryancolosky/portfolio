@@ -185,5 +185,5 @@ const Template: Story = {
 export const PostTemplate: Story = {
   ...Template,
   name: '↪ Template',
-  args: { animation: true }
+  args: { animate: true }
 };

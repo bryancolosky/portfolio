@@ -1,16 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
 // 🔩 Components
-import Media from '../ui/components/Media';
-import Box from '../ui/components/Box';
+
 import Page from '../ui/components/Page';
-import PostCover from '../ui/components/Post/elements/CoverSheet';
-import Button from '../ui/components/Button';
-import ButtonGroup from '../ui/components/ButtonGroup';
-import FullFrame from '../ui/components/FullFrame';
-import Text from '../ui/components/Typography';
-import Link from '../ui/components/Link';
-import Map from '../ui/components/Map';
 import Photograph from '../ui/components/Photograph';
 
 const meta = {
@@ -49,5 +41,5 @@ const Template: Story = {
 export const PostTemplate: Story = {
   ...Template,
   name: '↪ Template',
-  args: { animation: true }
+  args: { animate: true }
 };

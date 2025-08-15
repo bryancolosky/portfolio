@@ -8,7 +8,6 @@ import Page from '../ui/components/Page';
 const meta = {
   title: 'Components 🔋 / Layouts 🏗 / Grid',
   component: Grid,
-  subcomponents: { Cell: Grid.Cell },
   parameters: {
     layout: 'centered'
   },
@@ -25,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 const Template: Story = {
   render: ({ ...args }) => {
     return (
-      <Page animation={false}>
+      <Page animate={false}>
         <Box width="100%">
           <Grid {...args}>
             <Grid.Cell area="main">

@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 const Template: Story = {
   render: ({ ...args }) => {
     return (
-      <Page animation={false}>
+      <Page animate={false}>
         <Box width="100%">
           <Gravatar {...args} />
         </Box>
