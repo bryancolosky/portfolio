@@ -1,0 +1,369 @@
+@use '@/ui/styles/app.scss';
+
+.photographCover {
+  margin: app.space(none) auto app.space(none) auto;
+  padding: calc(app.space(super-loose)) app.space(bit-loose);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: app.space(base);
+  align-items: center;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    padding: app.space(extra-loose) app.space(super-loose);
+  }
+  @include app.mq(laptop) {
+    grid-template-columns: 1fr 1fr;
+    gap: app.space(bit-loose);
+    padding: app.space(bit-loose) app.space(super-loose);
+  }
+  @include app.mq(laptopLg) {
+    grid-template-columns: 1fr 1fr;
+    gap: app.space(loose);
+    padding: app.space(loose) app.space(super-loose);
+  }
+  @include app.mq(desktop) {
+    grid-template-columns: 1fr 1fr;
+    gap: app.space(extra-loose);
+    padding: app.space(extra-loose) calc(app.space(super-loose) * 2);
+  }
+  @include app.mq(desktopHD) {
+    grid-template-columns: 1fr 5fr;
+    gap: app.space(super-loose);
+    padding: app.space(super-loose) calc(app.space(super-loose) * 2);
+  }
+
+  &.photographFilled {
+    &::after {
+      content: '';
+      position: absolute;
+      opacity: 100%;
+      background-color: var(--cover-background);
+      border-radius: app.space(super-loose);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    &.themeGreen {
+      &::after {
+        --color: var(--theme-green);
+        --photograph-background: var(--theme-green-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeViolet {
+      &::after {
+        --color: var(--theme-violet);
+        --photograph-background: var(--theme-violet-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeBlue {
+      &::after {
+        --color: var(--theme-blue);
+        --photograph-background: var(--theme-blue-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeRed {
+      &::after {
+        --color: var(--theme-red);
+        --photograph-background: var(--theme-red-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeOrange {
+      &::after {
+        --color: var(--theme-orange);
+        --photograph-background: var(--theme-orange-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeYellow {
+      &::after {
+        --color: var(--theme-yellow);
+        --photograph-background: var(--theme-yellow-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeIndigo {
+      &::after {
+        --color: var(--theme-indigo);
+        --photograph-background: var(--theme-indigo-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeBlack {
+      &::after {
+        --color: var(--theme-black);
+        --photograph-background: var(--theme-black-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeWhite {
+      &::after {
+        --color: var(--theme-white);
+        --photograph-background: var(--theme-white-bg);
+        background-color: var(--photograph-background);
+        fill: var(--color);
+      }
+    }
+  }
+}
+
+.coverMedia {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+  margin-left: 0;
+  order: 1;
+  margin: {
+    top: app.space(base);
+    bottom: app.space(base);
+  }
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    order: 2;
+    margin: {
+      top: app.space(bit-loose);
+      bottom: app.space(bit-loose);
+    }
+  }
+  @include app.mq(laptop) {
+    order: 2;
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+  }
+  @include app.mq(laptopLg) {
+    order: 2;
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+  }
+  @include app.mq(desktop) {
+    order: 2;
+    margin: {
+      top: app.space(extra-loose);
+      bottom: app.space(extra-loose);
+    }
+  }
+  @include app.mq(desktopHD) {
+    order: 2;
+    margin: {
+      top: app.space(super-loose);
+      bottom: app.space(super-loose);
+    }
+  }
+}
+
+.photographBody {
+  order: 2;
+
+  > .photographHeader {
+    > .photographMeta,
+    > .coverTitle {
+      width: 100%;
+    }
+
+    > .photographMeta {
+      > .photographSlug {
+        @include app.caption-text-style;
+        & {
+          -webkit-writing-mode: vertical-rl;
+          writing-mode: vertical-rl;
+        }
+      }
+    }
+
+    > .coverTitle {
+      @include app.H4-text-style;
+      & {
+        margin: app.space(none);
+      }
+
+      @include app.mq(mobileSm) {
+      }
+      @include app.mq(mobileMd) {
+      }
+      @include app.mq(mobileLg) {
+      }
+      @include app.mq(tablet) {
+        order: 1;
+        @include app.H3-text-style;
+      }
+      @include app.mq(laptop) {
+        order: 1;
+        @include app.H2-text-style;
+      }
+      @include app.mq(laptopLg) {
+        order: 1;
+        @include app.H1-text-style;
+      }
+      @include app.mq(desktop) {
+        order: 1;
+        @include app.H1-text-style;
+      }
+      @include app.mq(desktopHD) {
+        order: 1;
+        @include app.H1-text-style;
+      }
+    }
+  }
+
+  > .photographOverview {
+    max-width: app.space(super-loose) * 12;
+    @include app.body2-text-style;
+
+    @include app.mq(mobileSm) {
+    }
+    @include app.mq(mobileMd) {
+    }
+    @include app.mq(mobileLg) {
+    }
+    @include app.mq(tablet) {
+      @include app.body1-text-style;
+    }
+    @include app.mq(laptop) {
+      @include app.subtitle2-text-style;
+    }
+    @include app.mq(laptopLg) {
+      @include app.subtitle1-text-style;
+    }
+    @include app.mq(desktop) {
+      @include app.lead-text-style;
+    }
+    @include app.mq(desktopHD) {
+      @include app.lead-text-style;
+    }
+  }
+
+  > .photographFooter {
+    width: 100%;
+
+    > .photographUrl {
+      @include app.body2-text-style;
+
+      @include app.mq(mobileSm) {
+      }
+      @include app.mq(mobileMd) {
+      }
+      @include app.mq(mobileLg) {
+      }
+      @include app.mq(tablet) {
+        @include app.body1-text-style;
+      }
+      @include app.mq(laptop) {
+        @include app.subtitle2-text-style;
+      }
+      @include app.mq(laptopLg) {
+        @include app.subtitle1-text-style;
+      }
+      @include app.mq(desktop) {
+        @include app.lead-text-style;
+      }
+      @include app.mq(desktopHD) {
+        @include app.lead-text-style;
+      }
+    }
+  }
+
+  > .photographHeader,
+  > .photographFooter {
+    margin: app.space(base) 0;
+  }
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    order: 1;
+  }
+  @include app.mq(laptop) {
+    order: 1;
+  }
+  @include app.mq(laptopLg) {
+    order: 1;
+  }
+  @include app.mq(desktop) {
+    order: 1;
+  }
+  @include app.mq(desktopHD) {
+    order: 1;
+  }
+}
+
+.photographCategory {
+  @include app.overline-text-style;
+  & {
+    vertical-align: text-bottom;
+  }
+}
+
+// Article
+header.header,
+.header {
+  width: 100%;
+}
+
+.figureImg {
+  width: 100%;
+  border-radius: app.space(base);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+.figurePic {
+  width: 100%;
+}
+
+.figureCaption,
+.figurePicCaption {
+  width: 100%;
+  color: var(--color-silver);
+
+  @include app.caption-text-style;
+  & {
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+  }
+}

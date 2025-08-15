@@ -1,0 +1,108 @@
+@use '@/ui/styles/app.scss';
+
+.link {
+  text-decoration: none;
+
+  @include app.link-text-style;
+
+  &::after {
+    --link-fill: var(--link-color);
+    background-color: var(--link-fill);
+    height: app.em(app.space(tight));
+    width: 100%;
+    position: absolute;
+    left: app.em(app.space(extra-tight) * -1);
+    bottom: app.em(app.space(extra-tight) * -0.5);
+    border-radius: app.em(app.space(tight)) app.em(app.space(extra-tight));
+    content: ' ';
+    z-index: -1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  svg {
+    transform: translate(0, 0);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:focus,
+  &:focus-visible,
+  &:active {
+    outline: 1px dotted var(--body-color);
+    outline-offset: -1px;
+  }
+
+  &:focus-visible {
+    &::after {
+      height: app.em(app.space(loose));
+      left: app.em(app.space(extra-tight));
+      width: 100%;
+      border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  &:hover {
+    &:after {
+      height: app.em(app.space(bit-loose));
+      left: app.em(app.space(extra-tight));
+      border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+      transition: all 0.2s ease-in-out;
+    }
+
+    svg {
+      transform: translate(app.em(app.space(extra-tight)), 0);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  &:active {
+    &::after {
+      height: app.em(app.space(bit-loose) * 1.2);
+      left: app.em(app.space(extra-tight));
+      width: 100%;
+      border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+}
+
+.monochrome {
+  &:after {
+    --link-fill: var(--link-subdued-color);
+    background-color: var(--link-fill);
+  }
+}
+
+.primary {
+  &:after {
+    --link-fill: var(--active-color);
+    background-color: var(--link-fill);
+  }
+}
+
+.monochrome,
+.primary {
+  > a {
+    &:after {
+      --link-fill: transparent;
+      background-color: var(--link-fill);
+    }
+  }
+}

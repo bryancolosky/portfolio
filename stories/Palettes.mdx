@@ -1,0 +1,475 @@
+import {
+  Meta,
+  ColorPalette,
+  ColorItem,
+  Markdown
+} from '@storybook/addon-docs/blocks';
+
+import { colors } from '../ui/theme.ts';
+
+<Meta title="Foundations ⚡️ / Colors 🌈 / Palettes" />
+
+# Components
+
+## Tailwindcss
+
+<ColorPalette>
+  <ColorItem
+    title="UI colors "
+    subtitle={`Tailwindcss colors`}
+    colors={{
+      Background: `${colors.nearWhite}`,
+      Foreground: `${colors.navy}`
+    }}
+  />
+  <ColorItem
+    title="Background"
+    subtitle={'var(--background)'}
+    colors={{
+      Background: `${colors.nearWhite}`
+    }}
+  />
+  <ColorItem
+    title="Foreground"
+    subtitle={'var(--foreground)'}
+    colors={{
+      Foreground: `${colors.navy}`
+    }}
+  />
+</ColorPalette>
+
+## Shadcn colors
+
+<ColorPalette>
+  <ColorItem
+    title="UI colors "
+    subtitle={`Shadcn colors`}
+    colors={{
+      Background: `${colors.nearWhite}`,
+      Foreground: `${colors.navy}`
+    }}
+  />
+  <ColorItem
+    title="Background"
+    subtitle={'var(--background)'}
+    colors={{
+      Background: `${colors.nearWhite}`
+    }}
+  />
+  <ColorItem
+    title="Foreground"
+    subtitle={'var(--foreground)'}
+    colors={{
+      Foreground: `${colors.navy}`
+    }}
+  />
+</ColorPalette>
+
+# Palettes
+
+## Warm 🔥
+
+### Violet
+
+<ColorPalette>
+  <ColorItem
+    title="Violet scheme"
+    subtitle={`Warm 🔥`}
+    colors={{
+      DarkPink: `${colors.darkPink}`,
+      Fuchsia: `${colors.fuchsia}`,
+      HotPink: `${colors.hotPink}`,
+      Pink: `${colors.pink}`,
+      LightPink: `${colors.lightPink}`,
+      LightestPink: `${colors.lightestPink}`,
+      WashedPink: `${colors.washedPink}`
+    }}
+  />
+  <ColorItem
+    title="Dark Pink"
+    subtitle={'var(--color-dark-pink)'}
+    colors={{
+      DarkPink: `${colors.darkPink}`
+    }}
+  />
+  <ColorItem
+    title="Fuchsia"
+    subtitle={'var(--color-fuchsia)'}
+    colors={{
+      Fuchsia: `${colors.fuchsia}`
+    }}
+  />
+  <ColorItem
+    title="Hot Pink"
+    subtitle={'var(--color-hot-pink)'}
+    colors={{
+      HotPink: `${colors.hotPink}`
+    }}
+  />
+  <ColorItem
+    title="Pink"
+    subtitle={'var(--color-pink)'}
+    colors={{
+      Pink: `${colors.pink}`
+    }}
+  />
+  <ColorItem
+    title="Light Pink"
+    subtitle={'var(--color-light-pink)'}
+    colors={{
+      LightPink: `${colors.lightPink}`
+    }}
+  />
+  <ColorItem
+    title="Lightest Pink"
+    subtitle={'var(--color-lightest-pink)'}
+    colors={{
+      LightestPink: `${colors.lightestPink}`
+    }}
+  />
+  <ColorItem
+    title="Washed Pink"
+    subtitle={'var(--color-washed-pink)'}
+    colors={{
+      WashedPink: `${colors.washedPink}`
+    }}
+  />
+</ColorPalette>
+
+### Red
+
+<ColorPalette>
+  <ColorItem
+    title="Red Scheme"
+    subtitle={`Warm 🔥`}
+    colors={{
+      Maroon: `${colors.maroon}`,
+      DarkRed: `${colors.darkRed}`,
+      Red: `${colors.red}`,
+      LightRed: `${colors.lightRed}`,
+      WashedRed: `${colors.washedRed}`
+    }}
+  />
+  <ColorItem
+    title="Maroon"
+    subtitle={'var(--color-maroon)'}
+    colors={{
+      Maroon: `${colors.maroon}`
+    }}
+  />
+  <ColorItem
+    title="Dark Red"
+    subtitle={'var(--color-dark-red)'}
+    colors={{
+      DarkRed: `${colors.darkRed}`
+    }}
+  />
+  <ColorItem
+    title="Red"
+    subtitle={'var(--color-red)'}
+    colors={{
+      Red: `${colors.red}`
+    }}
+  />
+  <ColorItem
+    title="Light Red"
+    subtitle={'var(--color-light-red)'}
+    colors={{
+      LightRed: `${colors.lightRed}`
+    }}
+  />
+  <ColorItem
+    title="Washed Red"
+    subtitle={'var(--color-washed-red)'}
+    colors={{
+      LightRed: `${colors.washedRed}`
+    }}
+  />
+</ColorPalette>
+
+### Orange
+
+<ColorPalette>
+  <ColorItem
+    title="Orange Scheme"
+    subtitle={`Warm 🔥`}
+    colors={{
+      Rust: `${colors.rust}`,
+      Orange: `${colors.orange}`,
+      Tangerine: `${colors.tangerine}`,
+      Gold: `${colors.gold}`
+    }}
+  />
+  <ColorItem
+    title="Rust"
+    subtitle={'var(--color-rust)'}
+    colors={{
+      Rust: `${colors.rust}`
+    }}
+  />
+  <ColorItem
+    title="Orange"
+    subtitle={'var(--color-orange)'}
+    colors={{
+      Orange: `${colors.orange}`
+    }}
+  />
+  <ColorItem
+    title="Tangerine"
+    subtitle={'var(--color-tangerine)'}
+    colors={{
+      Tangerine: `${colors.tangerine}`
+    }}
+  />
+  <ColorItem
+    title="Gold"
+    subtitle={'var(--color-gold)'}
+    colors={{
+      Gold: `${colors.gold}`
+    }}
+  />
+</ColorPalette>
+
+### Yellow
+
+<ColorPalette>
+  <ColorItem
+    title="Yellow Scheme"
+    subtitle={`Warm 🔥`}
+    colors={{
+      Brown: `${colors.brown}`,
+      Yellow: `${colors.yellow}`,
+      LightYellow: `${colors.lightYellow}`,
+      WashedYellow: `${colors.washedYellow}`
+    }}
+  />
+  <ColorItem
+    title="Brown"
+    subtitle={'var(--color-brown)'}
+    colors={{
+      Brown: `${colors.brown}`
+    }}
+  />
+  <ColorItem
+    title="Yellow"
+    subtitle={'var(--color-yellow)'}
+    colors={{
+      Yellow: `${colors.yellow}`
+    }}
+  />
+  <ColorItem
+    title="Light Yellow"
+    subtitle={'var(--color-light-yellow)'}
+    colors={{
+      LightYellow: `${colors.lightYellow}`
+    }}
+  />
+  <ColorItem
+    title="Washed Yellow"
+    subtitle={'var(--color-washed-yellow)'}
+    colors={{
+      WashedYellow: `${colors.washedYellow}`
+    }}
+  />
+</ColorPalette>
+
+## Cool ❄️
+
+### Green
+
+<ColorPalette>
+  <ColorItem
+    title="Green Scheme"
+    subtitle={`Cool ❄️`}
+    colors={{
+      Forest: `${colors.forest}`,
+      DarkGreen: `${colors.darkGreen}`,
+      Olive: `${colors.olive}`,
+      Green: `${colors.green}`,
+      Lime: `${colors.lime}`,
+      LightGreen: `${colors.lightGreen}`,
+      WashedGreen: `${colors.washedGreen}`
+    }}
+  />
+  <ColorItem
+    title="Forest"
+    subtitle={'var(--color-forest)'}
+    colors={{
+      Forest: `${colors.forest}`
+    }}
+  />
+  <ColorItem
+    title="Dark Green"
+    subtitle={'var(--color-dark-green)'}
+    colors={{
+      DarkGreen: `${colors.darkGreen}`
+    }}
+  />
+  <ColorItem
+    title="Olive"
+    subtitle={'var(--color-olive)'}
+    colors={{
+      Olive: `${colors.olive}`
+    }}
+  />
+  <ColorItem
+    title="Green"
+    subtitle={'var(--color-green)'}
+    colors={{
+      Green: `${colors.green}`
+    }}
+  />
+  <ColorItem
+    title="Lime"
+    subtitle={'var(--color-lime)'}
+    colors={{
+      Lime: `${colors.lime}`
+    }}
+  />
+  <ColorItem
+    title="Light Green"
+    subtitle={'var(--color-light-green)'}
+    colors={{
+      LightGreen: `${colors.lightGreen}`
+    }}
+  />
+  <ColorItem
+    title="Washed Green"
+    subtitle={'var(--color-washed-green)'}
+    colors={{
+      WashedGreen: `${colors.washedGreen}`
+    }}
+  />
+</ColorPalette>
+
+### Teal
+
+<ColorPalette>
+  <ColorItem
+    title="Blue scheme"
+    subtitle={`Cool ❄️`}
+    colors={{
+      Teal: `${colors.teal}`,
+      Aqua: `${colors.aqua}`,
+
+    }}
+
+/>
+
+  <ColorItem
+    title="Teal"
+    subtitle={'var(--color-teal)'}
+    colors={{
+      Teal: `${colors.teal}`
+    }}
+  />
+  <ColorItem
+    title="Aqua"
+    subtitle={'var(--color-aqua)'}
+    colors={{
+      Aqua: `${colors.aqua}`
+    }}
+  />
+</ColorPalette>
+
+### Blue
+
+<ColorPalette>
+  <ColorItem
+    title="Blue scheme"
+    subtitle={`Cool ❄️`}
+    colors={{
+      Navy: `${colors.navy}`,
+      DarkBlue: `${colors.darkBlue}`,
+      Blue: `${colors.blue}`,
+      LightBlue: `${colors.lightBlue}`,
+      LightestBlue: `${colors.lightestBlue}`,
+      WashedBlue: `${colors.washedBlue}`
+    }}
+  />
+  <ColorItem
+    title="Navy"
+    subtitle={'var(--color-navy)'}
+    colors={{
+      Navy: `${colors.navy}`
+    }}
+  />
+  <ColorItem
+    title="Dark Blue"
+    subtitle={'var(--color-dark-blue)'}
+    colors={{
+      DarkBlue: `${colors.darkBlue}`
+    }}
+  />
+  <ColorItem
+    title="Blue"
+    subtitle={'var(--color-blue)'}
+    colors={{
+      Blue: `${colors.blue}`
+    }}
+  />
+  <ColorItem
+    title="Light Blue"
+    subtitle={'var(--color-light-blue)'}
+    colors={{
+      LightBlue: `${colors.lightBlue}`
+    }}
+  />
+  <ColorItem
+    title="Lightest Blue"
+    subtitle={'var(--color-lightest-blue)'}
+    colors={{
+      LightestBlue: `${colors.lightestBlue}`
+    }}
+  />
+  <ColorItem
+    title="Washed Blue"
+    subtitle={'var(--color-washed-blue)'}
+    colors={{
+      WashedBlue: `${colors.washedBlue}`
+    }}
+  />
+</ColorPalette>
+
+### Indigo
+
+<ColorPalette>
+  <ColorItem
+    title="Indigo scheme"
+    subtitle={`Cool ❄️`}
+    colors={{
+      Purple: `${colors.purple}`,
+      LightPurple: `${colors.lightPurple}`,
+      LightestPurple: `${colors.lightestPurple}`,
+      WashedPurple: `${colors.washedPurple}`
+    }}
+  />
+  <ColorItem
+    title="Purple"
+    subtitle={'var(--color-purple)'}
+    colors={{
+      Purple: `${colors.purple}`
+    }}
+  />
+  <ColorItem
+    title="Light Purple"
+    subtitle={'var(--color-light-purple)'}
+    colors={{
+      LightPurple: `${colors.lightPurple}`
+    }}
+  />
+  <ColorItem
+    title="Lightest Purple"
+    subtitle={'var(--color-lightest-purple)'}
+    colors={{
+      LightestPurple: `${colors.lightestPurple}`
+    }}
+  />
+  <ColorItem
+    title="Washed Purple"
+    subtitle={'var(--color-washed-purple)'}
+    colors={{
+      WashedPurple: `${colors.washedPurple}`
+    }}
+  />
+</ColorPalette>

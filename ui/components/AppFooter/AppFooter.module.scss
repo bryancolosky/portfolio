@@ -1,0 +1,51 @@
+@use '@/ui/styles/app.scss';
+
+.appFooter {
+  --app-footer-font-family: var(--font-family);
+  --app-footer-color: var(--theme-text);
+  position: relative;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+  @include app.mq(desktopTV) {
+  }
+
+  .appFooterLinks {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: app.space(tight);
+    font-size: var(--font-size-caption);
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+    > li:not(:last-of-type) {
+      margin: {
+        right: app.space(base);
+      }
+    }
+  }
+
+  .appFooterAnchor {
+    margin: {
+      top: app.space(super-loose);
+      bottom: app.space(base);
+    }
+  }
+}

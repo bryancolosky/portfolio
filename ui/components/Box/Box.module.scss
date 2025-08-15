@@ -1,0 +1,72 @@
+@use '@/ui/styles/app.scss';
+
+.box {
+  --box-shadow: initial;
+  --box-background: initial;
+  --box-border-radius: initial;
+  --box-border-end-start-radius: var(--box-border-radius);
+  --box-border-end-end-radius: var(--box-border-radius);
+  --box-border-start-start-radius: var(--box-border-radius);
+  --box-border-start-end-radius: var(--box-border-radius);
+  --box-color: initial;
+  --box-min-height: initial;
+  --box-min-width: initial;
+  --box-max-width: initial;
+  --box-outline-color: initial;
+  --box-outline-style: initial;
+  --box-outline-width: initial;
+  --box-overflow-x: initial;
+  --box-overflow-y: initial;
+  --box-width: initial;
+  --box-border-style: initial;
+  --box-border-color: initial;
+  --box-border-width: 0;
+  --box-border-block-start-width: var(--box-border-width);
+  --box-border-block-end-width: var(--box-border-width);
+  --box-border-inline-start-width: var(--box-border-width);
+  --box-border-inline-end-width: var(--box-border-width);
+  --box-inset-block-start: initial;
+  --box-inset-block-end: initial;
+  --box-inset-inline-start: initial;
+  --box-inset-inline-end: initial;
+  inset-block-start: var(--box-inset-block-start);
+  inset-block-end: var(--box-inset-block-end);
+  inset-inline-start: var(--box-inset-inline-start);
+  inset-inline-end: var(--box-inset-inline-end);
+  background-color: var(--box-background);
+  box-shadow: var(--box-shadow);
+  border-end-start-radius: var(--box-border-end-start-radius);
+  border-end-end-radius: var(--box-border-end-end-radius);
+  border-start-start-radius: var(--box-border-start-start-radius);
+  border-start-end-radius: var(--box-border-start-end-radius);
+  border-color: var(--box-border-color);
+  border-style: var(--box-border-style);
+  border-block-start-width: var(--box-border-block-start-width);
+  border-block-end-width: var(--box-border-block-end-width);
+  border-inline-start-width: var(--box-border-inline-start-width);
+  border-inline-end-width: var(--box-border-inline-end-width);
+  color: var(--box-color);
+  min-height: var(--box-min-height);
+  min-width: var(--box-min-width);
+  max-width: var(--box-max-width);
+  outline-color: var(--box-outline-color);
+  outline-style: var(--box-outline-style);
+  outline-width: var(--box-outline-width);
+  overflow-x: var(--box-overflow-x);
+  overflow-y: var(--box-overflow-y);
+  width: var(--box-width);
+  -webkit-overflow-scrolling: touch;
+
+  @include app.responsive-custom-property(
+    'box',
+    'padding-block-start',
+    'space'
+  );
+  @include app.responsive-custom-property('box', 'padding-block-end', 'space');
+  @include app.responsive-custom-property(
+    'box',
+    'padding-inline-start',
+    'space'
+  );
+  @include app.responsive-custom-property('box', 'padding-inline-end', 'space');
+}

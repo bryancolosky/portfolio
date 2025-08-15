@@ -1,0 +1,305 @@
+{/* // 🔌 Vendors */}
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+import { typeSettings } from './Typography';
+
+---
+
+# Typography 🖋
+
+Typography helps establish hierarchy and communicate important content by creating clear visual patterns.
+
+---
+
+## Guidelines
+
+When designing with type, I use a combination of font size, weight, color, and space to ensure a strong hierarchy and scannability of a page.
+
+---
+
+### Working with typography 📒
+
+#### 1. Make it scannable
+
+Keep related text aligned and closer together to create visual groupings. For most languages, the the majority of text should be left-aligned.
+
+#### 2. Adjust text based on device size and distance from the user
+
+Because small screens are often at an arm's distance, we can decrease the size of larger headings and increase the size of important body text.
+
+#### 3. Create visual hierarchy
+
+Pair font weight, size, and color together to create hierarchy. Use a lighter color or font-size to de-emphasize secondary content.
+
+---
+
+## Headlines 🖊
+
+Write all headlines in sentence case.
+
+Use HTML tags, such as `<h1>`, `<h2>` and so on, to tag the headlines on a page.
+
+---
+
+# Headline 1
+
+## Headline 2
+
+### Headline 3
+
+#### Headline 4
+
+##### Headline 5
+
+###### Headline 6
+
+---
+
+## Body ✏️
+
+export const markdown = `
+Look **again at that dot!** That's here. That's home. That's us. On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives. The aggregate of our joy and suffering, thousands of confident religions, ideologies, and economic doctrines, every hunter and forager, every hero and coward, every creator and destroyer of civilization, every king and peasant, every young couple in love, every mother and father, hopeful child, inventor and explorer, every teacher of morals, every corrupt politician, every "superstar," every "supreme leader," every saint and sinner in the history of our species lived there—on a mote of dust suspended in a sunbeam.
+
+## Section heading
+
+The Earth is a very [small]() stage in a vast cosmic arena. Think of the rivers of blood spilled by all those generals and emperors so that, in glory and triumph, they could become the momentary masters of a fraction of a dot. Think of the endless cruelties visited by the inhabitants of one corner of this pixel on the scarcely distinguishable inhabitants of some other corner, how frequent their misunderstandings, how eager they are to kill one another, how fervent their hatreds.
+
+Our posturings, our imagined self-importance[^1], the delusion that we have some privileged position in the Universe, are challenged by this point of pale light. Our planet is a lonely speck in the great enveloping cosmic dark. In our obscurity, in all this vastness, there is no hint that help will come from elsewhere to save us from ourselves.
+
+The Earth is the only world known so far to harbor life. There is nowhere else, at least in the near future, to which our species could migrate. Visit, yes. Settle, not yet. Like it or not, for the moment the Earth is where we make our stand.
+
+~~It has been said that astronomy is a humbling and character-building experience.~~ There is perhaps no better demonstration of the folly of human conceits than this distant image of our tiny world. To me, it underscores our responsibility to deal more kindly with one another, and to preserve and cherish the pale blue dot, the only home we've ever known.
+
+[^1]: My footnote
+
+`
+
+<ReactMarkdown
+  children={markdown}
+  remarkPlugins={[remarkGfm]}
+  components={typeSettings}
+/>
+
+---
+
+## Links 🔗
+
+[Home link 🏠](https://bryancolosky.com "Link to Bryan Colosky's Portfolio")
+
+---
+
+## Blockquotes
+
+> This is a blockquote element used for pull quotes
+
+---
+
+## Lists 🧾
+
+### Unordered
+
+- Unordered list-item
+- Unordered list-item
+- Unordered list-item
+- Unordered list-item
+- Unordered list-item
+
+### Ordered
+
+1. Ordered list-item
+2. Ordered list-item
+3. Ordered list-item
+4. Ordered list-item
+5. Ordered list-item
+
+### Tasklists
+
+export const taskList = `
+- [ ] to do
+- [x] done
+`;
+
+<ReactMarkdown children={taskList} remarkPlugins={[remarkGfm]} />
+
+---
+
+## Emoji
+
+### 👩‍🚀 🤖 🌵 ⚡️ 📫 🎒 📷 🫐 🔰
+
+---
+
+## Code
+
+`CODE`, `VARIABLE`, `CONSTANT`
+
+```html
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>HTML</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Header</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section>
+        <h1>Section headline</h1>
+        <article>
+          <h2>Article headline</h2>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Donec a
+            diam lectus. Set sit amet ipsum mauris. Maecenas congue ligula as
+            quam viverra nec consectetur ant hendrerit.
+          </p>
+        </article>
+
+        <aside>
+          <h2>Aside</h2>
+
+          <ul>
+            <li><a href="#">Oh I do like to be beside the seaside</a></li>
+            <li><a href="#">Oh I do like to be beside the sea</a></li>
+            <li><a href="#">Although in the North of England</a></li>
+          </ul>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <p>©Copyright 2050 by nobody. All rights reversed.</p>
+    </footer>
+  </body>
+</html>
+```
+
+---
+
+# Imagery
+
+Avoid using images for unnecessary decoration. Only use images if there’s a real user need.
+
+## Image
+
+![](https://source.unsplash.com/qHajeosTxBU)
+
+---
+
+# Tables
+
+## Basic
+
+export const markdownTable = `
+| Tables | Are | Cool |
+| -------- | :-----------: | ----: |
+| col 1 is | left-aligned | 🌵 🪴|
+| col 2 is | centered | 👩‍🚀 🤖 |
+| col 3 is | right-aligned | 🌐 🔌 |
+`;
+
+<ReactMarkdown
+  children={markdownTable}
+  remarkPlugins={[remarkGfm]}
+  components={{
+    table: ({ node, ...props }) => (
+      <table className="table table-responsive" {...props}>
+        {props.children}
+      </table>
+    )
+  }}
+/>
+
+### With Row Hover
+
+<ReactMarkdown
+  children={markdownTable}
+  remarkPlugins={[remarkGfm]}
+  components={{
+    table: ({ node, ...props }) => (
+      <table className="table table-hover table-responsive" {...props}>
+        {props.children}
+      </table>
+    )
+  }}
+/>
+
+## Striped
+
+<ReactMarkdown
+  children={markdownTable}
+  remarkPlugins={[remarkGfm]}
+  components={{
+    table: ({ node, ...props }) => (
+      <table className="table table-striped table-responsive" {...props}>
+        {props.children}
+      </table>
+    )
+  }}
+/>
+
+### With Row Hover
+
+<ReactMarkdown
+  children={markdownTable}
+  remarkPlugins={[remarkGfm]}
+  components={{
+    table: ({ node, ...props }) => (
+      <table
+        className="table table-hover table-striped table-responsive"
+        {...props}
+      >
+        {props.children}
+      </table>
+    )
+  }}
+/>
+
+## Bordered
+
+<ReactMarkdown
+  children={markdownTable}
+  remarkPlugins={[remarkGfm]}
+  components={{
+    table: ({ node, ...props }) => (
+      <table
+        className="table table-striped table-responsive table-bordered"
+        {...props}
+      >
+        {props.children}
+      </table>
+    )
+  }}
+/>
+
+### With Row Hover
+
+<ReactMarkdown
+  children={markdownTable}
+  remarkPlugins={[remarkGfm]}
+  components={{
+    table: ({ node, ...props }) => (
+      <table
+        className="table table-hover table-striped table-responsive table-bordered"
+        {...props}
+      >
+        {props.children}
+      </table>
+    )
+  }}
+/>

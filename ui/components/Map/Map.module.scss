@@ -1,0 +1,57 @@
+@use '../../styles/app.scss';
+
+// Map
+.map {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 66vh;
+  min-height: 66vh;
+  border-radius: app.space(base);
+  position: relative;
+  overflow: hidden;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    // min-height: 75vh;
+  }
+  @include app.mq(laptop) {
+    // min-height: 66vh;
+  }
+  @include app.mq(laptopLg) {
+    // min-height: 66vh;
+  }
+  @include app.mq(desktop) {
+    // min-height: 66vh;
+  }
+  @include app.mq(desktopHD) {
+    // min-height: 66vh;
+  }
+
+  & img {
+    border-radius: 0;
+  }
+
+  div.map-canvas,
+  .map-canvas {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  a {
+    font-size: 25%;
+    &:after {
+      display: none;
+    }
+  }
+}

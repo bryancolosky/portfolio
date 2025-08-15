@@ -1,0 +1,26 @@
+@use '@/ui/styles/app.scss';
+
+.badge {
+  display: inline-block;
+  padding: app.space(super-tight) app.space(tight);
+  background: var(--app-background);
+  border: 1px solid var(--badge-border);
+  border-radius: app.space(base);
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+}

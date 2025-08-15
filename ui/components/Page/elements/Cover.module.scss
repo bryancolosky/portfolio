@@ -1,0 +1,72 @@
+@import '../../styles/app.scss';
+
+.intro {
+  margin: space(none) space(none);
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+}
+
+.greeting {
+  @include H1-text-style;
+}
+
+.content {
+  width: 100%;
+  margin: space(none) space(none);
+  margin: {
+    right: space(bit-loose);
+    left: space(bit-loose);
+  }
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    margin: {
+      right: space(super-loose);
+      left: space(super-loose);
+    }
+  }
+  @include app.mq(laptop) {
+    margin: {
+      right: space(super-loose);
+      left: space(super-loose);
+    }
+  }
+  @include app.mq(laptopLg) {
+    margin: {
+      right: space(super-loose);
+      left: space(super-loose);
+    }
+  }
+  @include app.mq(desktop) {
+    margin: {
+      right: space(super-loose);
+      left: space(super-loose);
+    }
+  }
+  @include app.mq(desktopHD) {
+    margin: {
+      right: space(super-loose);
+      left: space(super-loose);
+    }
+  }
+}

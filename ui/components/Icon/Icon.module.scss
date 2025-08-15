@@ -1,0 +1,133 @@
+@use '@/ui/styles/app.scss';
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  --icon-height: #{app.$icon-size-medium};
+  --icon-width: #{app.$icon-size-medium};
+  width: var(--icon-height);
+  height: var(--icon-width);
+  min-height: app.space(bit-tight);
+  min-width: app.space(bit-tight);
+  max-height: app.space(super-loose);
+  max-width: app.space(super-loose);
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
+}
+
+.icon svg {
+  fill: currentColor;
+}
+
+.sizeSmall svg {
+  --icon-height: #{app.$icon-size-small};
+  --icon-width: #{app.$icon-size-small};
+}
+
+.sizeMedium svg {
+  --icon-height: #{app.$icon-size-medium};
+  --icon-width: #{app.$icon-size-medium};
+}
+
+.sizeLarge svg {
+  --icon-height: #{app.$icon-size-large};
+  --icon-width: #{app.$icon-size-large};
+}
+
+.sizeXlarge svg {
+  --icon-height: #{app.$icon-size-xlarge};
+  --icon-width: #{app.$icon-size-xlarge};
+}
+
+.toneInherit svg {
+  color: inherit;
+}
+
+.toneBase svg {
+  color: var(--color-icon);
+}
+
+.toneSubdued svg {
+  color: var(--color-icon-secondary);
+}
+
+.toneCaution svg {
+  color: var(--color-icon-caution);
+}
+
+.toneWarning svg {
+  color: var(--color-icon-warning);
+}
+
+.toneCritical svg {
+  color: var(--color-icon-critical);
+}
+
+.toneInteractive svg {
+  color: var(--color-icon-emphasis);
+}
+
+.toneInfo svg {
+  color: var(--color-icon-info);
+}
+
+.toneSuccess svg {
+  color: var(--color-icon-success);
+}
+
+.tonePrimary svg {
+  color: var(--color-icon-brand);
+}
+
+.toneEmphasis svg {
+  color: var(--color-icon-emphasis);
+}
+
+.toneMagic svg {
+  color: var(--color-icon-magic);
+}
+
+.toneTextCaution svg {
+  color: var(--color-text-caution);
+}
+
+.toneTextWarning svg {
+  color: var(--color-text-warning);
+}
+
+.toneTextCritical svg {
+  color: var(--color-text-critical);
+}
+
+.toneTextInfo svg {
+  color: var(--color-text-info);
+}
+
+.toneTextPrimary svg {
+  color: var(--color-text-brand);
+}
+
+.toneTextSuccess svg {
+  color: var(--color-text-success);
+}
+
+.toneTextMagic svg {
+  color: var(--color-text-magic);
+}
+
+.svg,
+.img {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.placeholder {
+  padding-bottom: 100%;
+  background: var(--color-bg-fill-tertiary);
+  border-radius: var(--border-radius-100);
+}

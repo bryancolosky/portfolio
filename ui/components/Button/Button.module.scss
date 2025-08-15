@@ -1,0 +1,453 @@
+@use '@/ui/styles/app.scss';
+
+.button {
+  @include app.button-text-style;
+
+  & {
+    display: inline-flex;
+    position: relative;
+    padding-block: var(--button-padding-block);
+    padding-inline: var(--button-padding-inline);
+    cursor: pointer;
+    user-select: none;
+    z-index: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  &::after {
+    --link-fill: var(--link-color);
+    background-color: var(--link-fill);
+    height: app.em(app.space(bit-tight));
+    width: 99%;
+    position: absolute;
+    left: app.em(app.space(extra-tight) * -1);
+    bottom: app.em(app.space(extra-tight) * -0.5);
+    border-radius: app.em(app.space(tight)) app.em(app.space(extra-tight));
+    content: ' ';
+    z-index: -1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  svg {
+    transform: translate(0, 0);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:focus,
+  &:focus-visible,
+  &:active {
+    outline: 1px dotted var(--body-color);
+    outline-offset: -1px;
+  }
+}
+
+.button.button svg {
+  fill: var(--text-color);
+}
+
+.button.button:hover svg {
+  fill: var(--text-color);
+}
+
+.button.button:active,
+.button.button[data-state='open'] svg {
+  fill: var(--text-color);
+}
+
+.button.button:disabled,
+.button.button[disabled],
+.disabled.disabled svg {
+  fill: var(--button-icon-fill_disabled);
+}
+
+.pressed.pressed,
+.pressed.pressed:hover,
+.pressed.pressed:active,
+.pressed.pressed:focus-visible svg {
+  fill: var(--button-icon-fill_pressed);
+}
+
+.button:hover {
+  &::after {
+    height: app.em(app.space(loose));
+    left: app.em(app.space(extra-tight));
+    width: 100%;
+    border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+    transition: all 0.2s ease-in-out;
+  }
+
+  svg {
+    transform: translate(app.em(app.space(extra-tight)), 0);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.button:active,
+.button[data-state='open'] {
+  &::after {
+    height: app.em(app.space(loose) * 1.1);
+    left: app.em(app.space(extra-tight));
+    width: 100%;
+    border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.button:focus-visible {
+  &::after {
+    height: app.em(app.space(loose));
+    left: app.em(app.space(extra-tight));
+    width: 100%;
+    border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.button:disabled,
+.button[disabled],
+.disabled {
+  display: inline-flex;
+}
+
+.pressed,
+.pressed:hover,
+.pressed:active,
+.pressed:focus-visible {
+  &::after {
+    height: app.em(app.space(loose) * 1.1);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+// VARIANTS
+.variantPrimary {
+  &::before {
+    content: ' ';
+    border: 2px solid var(--button-border);
+    border-radius: app.em(app.space(extra-loose));
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  &:after {
+    --button-fill: var(--active-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.variantSecondary {
+  &::before {
+    content: ' ';
+    border: 2px solid var(--button-border);
+    border-radius: app.em(app.space(extra-loose));
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  &:after {
+    --button-fill: var(--link-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.variantTertiary {
+  &::before {
+    content: ' ';
+    border: 2px solid var(--button-border);
+    border-radius: app.em(app.space(extra-loose));
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  &:after {
+    --button-fill: var(--link-subdued-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.variantPlain {
+  &::before {
+    content: ' ';
+    border: none;
+  }
+}
+
+.variantPlain:is(:hover, :active, :focus-visible) {
+  text-decoration: none;
+}
+
+.variantMonochromePlain {
+  &::before {
+    content: ' ';
+    border: none;
+  }
+  &:after {
+    --button-fill: var(--link-subdued-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.variantPlain,
+.variantMonochromePlain {
+  font-size: inherit;
+  padding: 0;
+}
+
+.variantPlain:hover,
+.variantMonochromePlain:hover {
+  &::after {
+    height: app.em(app.space(base));
+    left: app.em(app.space(extra-tight));
+    width: 100%;
+    border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+    transition: all 0.2s ease-in-out;
+  }
+
+  svg {
+    transform: translate(app.em(app.space(extra-tight)), 0);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.variantPlain:focus-visible,
+.variantMonochromePlain:focus-visible {
+  &::after {
+    height: app.em(app.space(base));
+    left: app.em(app.space(extra-tight));
+    width: 100%;
+    border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+// TONES
+.toneSuccess:is(.variantSecondary, .variantTertiary, .variantPlain) {
+  color: var(--success-text-color);
+  &::before {
+    --button-border: var(--success-border-color);
+    border-color: var(--button-border);
+    content: ' ';
+  }
+  &:after {
+    --button-fill: var(--success-fill-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.toneCritical:is(.variantSecondary, .variantTertiary, .variantPlain) {
+  color: var(--critical-text-color);
+  &::before {
+    --button-border: var(--critical-border-color);
+    border-color: var(--button-border);
+    content: ' ';
+  }
+  &:after {
+    --button-fill: var(--critical-fill-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.toneSuccess:is(.variantPrimary) {
+  &:after {
+    --button-fill: var(--success-fill-color);
+    background-color: var(--button-fill);
+  }
+}
+
+.toneCritical:is(.variantPrimary) {
+  &:after {
+    --button-fill: var(--critical-fill-color);
+    background-color: var(--button-fill);
+  }
+}
+
+// SIZES
+.sizeMicro {
+  @include app.rfs(app.fontSize(fine), --font-size-button);
+  & {
+    --button-padding-block: #{app.space(extra-tight)};
+    --button-padding-inline: #{app.space(bit-tight)};
+  }
+
+  .icon {
+    --icon-height: #{app.$icon-size-small};
+    --icon-width: #{app.$icon-size-small};
+  }
+}
+
+.sizeSmall {
+  --button-padding-block: #{app.space(tight)};
+  --button-padding-inline: #{app.space(tight)};
+
+  .icon {
+    --icon-height: #{app.$icon-size-medium};
+    --icon-width: #{app.$icon-size-medium};
+  }
+}
+
+.sizeMedium {
+  --button-padding-block: #{app.space(bit-tight)};
+  --button-padding-inline: #{app.space(bit-loose)};
+
+  .icon {
+    --icon-height: #{app.$icon-size-medium};
+    --icon-width: #{app.$icon-size-medium};
+  }
+}
+
+.sizeLarge {
+  @include app.rfs(app.fontSize(lead), --font-size-button);
+  & {
+    --button-padding-block: #{app.space(bit-tight)};
+    --button-padding-inline: #{app.space(loose)};
+  }
+
+  .icon {
+    --icon-height: #{app.$icon-size-large};
+    --icon-width: #{app.$icon-size-large};
+  }
+}
+
+// TEXT ALIGNMENT
+.textAlignCenter {
+  justify-content: center;
+  text-align: center;
+}
+
+.textAlignStart,
+.textAlignLeft {
+  justify-content: start;
+  text-align: start;
+}
+
+.textAlignEnd,
+.textAlignRight {
+  justify-content: end;
+  text-align: end;
+}
+
+// WIDTH
+.fullWidth {
+  width: 100%;
+}
+
+// ICON
+.iconOnly {
+  --button-padding-block: #{app.space(bit-tight)};
+  --button-padding-inline: #{app.space(bit-loose)};
+}
+
+.iconOnly:is(.sizeLarge) {
+  --button-padding-block: #{app.space(base)};
+  --button-padding-inline: #{app.space(loose)};
+}
+
+.iconOnly:is(.sizeSlim) {
+  --button-padding-block: #{app.space(tight)};
+  --button-padding-inline: #{app.space(bit-tight)};
+}
+
+.iconOnly:is(.sizeMicro) {
+  --button-padding-block: #{app.space(extra-tight)};
+  --button-padding-inline: #{app.space(bit-tight)};
+}
+
+.iconOnly:is(.variantTertiary) {
+  display: inline-flex;
+}
+
+.iconOnly:is(.variantTertiary, .variantPlain):not(.toneCritical) {
+  display: inline-flex;
+}
+
+.iconOnly:is(.variantMonochromePlain) {
+  display: inline-flex;
+}
+
+.iconOnly:is(.variantPlain, .variantMonochromePlain) {
+  display: inline-flex;
+}
+
+.iconWithText:not(.variantPlain, .variantMonochromePlain) {
+  display: inline-flex;
+}
+
+// DISCLOSURE
+.disclosure:not(.variantPlain, .variantMonochromePlain) {
+  display: inline-flex;
+}
+
+.disclosure:is(.textAlignStart, .textAlignLeft) {
+  justify-content: space-between;
+}
+
+// LOADING
+.loading {
+  color: transparent;
+}
+
+// INTERACTION
+.pressable:active:not(.variantTertiary, .variantPlain, .variantMonochromePlain)
+  > * {
+  display: inline-flex;
+}
+
+// UTILITIES
+.hidden {
+  visibility: hidden;
+}
+
+// ICON
+.icon {
+  min-height: var(--icon-height);
+  min-width: var(--icon-width);
+  margin-right: app.space(extra-tight);
+}
+
+// SPINNER
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  svg {
+    fill: var(--button-icon-fill_disabled);
+    vertical-align: middle;
+  }
+}
+
+// BUTTON GROUP
+[data-buttongroup-variant='segmented']
+  > *:not(:first-child)
+  .button:is(.variantPrimary) {
+  margin-left: calc(-1 * var(--space-025));
+}
+
+[data-buttongroup-variant='segmented'] > *:not(:first-child) .button {
+  border-top-left-radius: var(--border-radius-0);
+  border-bottom-left-radius: var(--border-radius-0);
+}
+
+[data-buttongroup-variant='segmented'] > *:not(:last-child) .button {
+  border-top-right-radius: var(--border-radius-0);
+  border-bottom-right-radius: var(--border-radius-0);
+}
+
+[data-buttongroup-full-width='true'] .button {
+  width: 100%;
+}
+
+[data-buttongroup-connected-top='true'] > *:first-child .button {
+  border-top-left-radius: var(--border-radius-0);
+}
+
+[data-buttongroup-connected-top='true'] > *:last-child .button {
+  border-top-right-radius: var(--border-radius-0);
+}

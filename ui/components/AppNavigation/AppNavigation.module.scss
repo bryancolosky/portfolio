@@ -1,0 +1,591 @@
+@use '@/ui/styles/app.scss';
+
+.navigation {
+  display: flex;
+}
+
+// Menu
+.menu {
+  --menu-color: var(--text-color);
+  --menu-background: var(--app-background);
+  display: none;
+  position: absolute;
+  flex-wrap: wrap;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: {
+    right: app.space(bit-loose);
+    left: app.space(bit-loose);
+  }
+  transition: display 0.3s ease-in-out;
+  will-change: display;
+  background-color: transparent;
+  z-index: -1;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    padding: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+  @include app.mq(laptop) {
+    margin: 0;
+    padding: 0 0 0 0;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    z-index: unset;
+  }
+  @include app.mq(laptopLg) {
+    margin: 0;
+    padding: 0 0 0 0;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+  }
+  @include app.mq(desktop) {
+    margin: 0;
+    padding: 0 0 0 0;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    z-index: unset;
+  }
+  @include app.mq(desktopHD) {
+    margin: 0;
+    padding: 0 0 0 0;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    z-index: unset;
+  }
+
+  @include app.mq(desktopTV) {
+    margin: 0;
+    padding: 0 0 0 0;
+    display: block;
+    position: relative;
+    width: auto;
+    height: auto;
+    z-index: unset;
+  }
+
+  &.menuOpen {
+    display: flex;
+    background-color: var(--menu-background);
+    align-items: center;
+    transition: display 0.3s ease-in-out;
+    will-change: display;
+
+    @include app.mq(mobileSm) {
+    }
+    @include app.mq(mobileMd) {
+    }
+    @include app.mq(mobileLg) {
+    }
+    @include app.mq(tablet) {
+    }
+    @include app.mq(laptop) {
+      background-color: transparent;
+    }
+    @include app.mq(laptopLg) {
+      background-color: transparent;
+    }
+    @include app.mq(desktop) {
+      background-color: transparent;
+    }
+    @include app.mq(desktopHD) {
+      background-color: transparent;
+    }
+    @include app.mq(desktopTV) {
+      background-color: transparent;
+    }
+  }
+}
+
+// Menu Toggle
+.menuToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+
+  span {
+    width: 100%;
+    height: 0.125rem;
+    background: var(--text-color);
+    border-radius: 0.25rem;
+    transition:
+      transform 0.3s linear,
+      opacity 0.3s linear;
+    will-change: transform, opacity;
+    position: relative;
+    transform-origin: 0% 50%;
+    &:first-child {
+      transform: rotate(0deg) translate(0%, 50%);
+    }
+    &:nth-child(2) {
+      opacity: 1;
+      transform: rotate(0deg) translate(0%, 50%);
+    }
+    &:nth-child(3) {
+      transform: rotate(0deg) translate(0%, 50%);
+    }
+  }
+
+  &.menuToggleOpen {
+    span {
+      &:first-child {
+        transform: rotate(45deg) translate(0%, -50%);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+        transform: rotate(0deg);
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(0%, 50%);
+      }
+    }
+  }
+
+  &:hover,
+  :focus {
+    border: none;
+  }
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+    display: none;
+  }
+  @include app.mq(laptopLg) {
+    display: none;
+  }
+  @include app.mq(desktop) {
+    display: none;
+  }
+  @include app.mq(desktopHD) {
+    display: none;
+  }
+  @include app.mq(desktopTV) {
+    display: none;
+  }
+}
+
+// Menu Index
+.menuIndex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  width: 100%;
+  padding: app.space(bit-loose) app.space(base);
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+    flex-direction: row;
+    padding: app.space(none) app.space(none);
+  }
+  @include app.mq(laptopLg) {
+    flex-direction: row;
+    padding: app.space(none) app.space(none);
+  }
+  @include app.mq(desktop) {
+    flex-direction: row;
+    padding: app.space(none) app.space(none);
+  }
+  @include app.mq(desktopHD) {
+    flex-direction: row;
+    padding: app.space(none) app.space(none);
+  }
+  @include app.mq(desktopTV) {
+    flex-direction: row;
+    padding: app.space(none) app.space(none);
+  }
+}
+
+.menuIndexItem {
+  display: block;
+  width: 100%;
+  margin: app.space(bit-loose) 0 0 0;
+  white-space: nowrap;
+  @include app.H1-text-style;
+
+  & > .url {
+    text-orientation: none;
+  }
+
+  &:first-of-type {
+    margin-top: 0rem;
+  }
+
+  &:last-of-type {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 6rem;
+    gap: 1rem;
+  }
+
+  @include app.mq(mobileSm) {
+  }
+
+  @include app.mq(mobileMd) {
+  }
+
+  @include app.mq(mobileLg) {
+  }
+
+  @include app.mq(tablet) {
+  }
+
+  @include app.mq(laptop) {
+    margin: 0 0 0 app.space(base);
+    @include app.list-text-style;
+
+    &:last-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin-block-start: 0;
+      margin-inline-start: 4rem;
+      gap: 1rem;
+    }
+  }
+
+  @include app.mq(laptopLg) {
+    margin: 0 0 0 app.space(base);
+    @include app.list-text-style;
+
+    &:last-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin-block-start: 0;
+      margin-inline-start: 4rem;
+      gap: 1rem;
+    }
+  }
+
+  @include app.mq(desktop) {
+    margin: 0 0 0 app.space(base);
+    @include app.list-text-style;
+
+    &:last-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin-block-start: 0;
+      margin-inline-start: 4rem;
+      gap: 1rem;
+    }
+  }
+
+  @include app.mq(desktopHD) {
+    margin: 0 0 0 app.space(base);
+    @include app.list-text-style;
+
+    &:last-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin-inline-start: 4rem;
+      gap: 1rem;
+    }
+  }
+
+  @include app.mq(desktopTV) {
+    margin: 0 0 0 app.space(base);
+    @include app.list-text-style;
+
+    &:last-of-type {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      margin-inline-start: 4rem;
+      gap: 1rem;
+    }
+  }
+
+  .select {
+    display: grid;
+    grid-template-areas: 'select';
+    align-items: center;
+    position: relative;
+    min-width: 16ch;
+    max-width: 100%;
+    background-color: var(--select-background);
+    border: 0.125rem solid var(--select-border);
+    border-radius: 0.5rem;
+    padding: app.space(base) app.space(bit-loose);
+
+    @include app.body1-text-style;
+    margin: 0;
+
+    select {
+      appearance: none;
+      position: relative;
+      background: transparent;
+      cursor: pointer;
+      line-height: 1.4;
+      width: 100%;
+      cursor: inherit;
+      outline: none;
+      z-index: app.$z-max;
+
+      &::-ms-expand {
+        display: none;
+      }
+      @include app.H6-text-style();
+
+      @include app.mq(mobileSm) {
+      }
+
+      @include app.mq(mobileMd) {
+      }
+
+      @include app.mq(mobileLg) {
+      }
+
+      @include app.mq(tablet) {
+      }
+
+      @include app.mq(laptop) {
+        @include app.body1-text-style(normal);
+        & {
+          margin-top: app.space(none);
+          margin-bottom: app.space(none);
+        }
+      }
+
+      @include app.mq(laptopLg) {
+        @include app.body1-text-style(normal);
+        & {
+          margin-top: app.space(none);
+          margin-bottom: app.space(none);
+        }
+      }
+
+      @include app.mq(desktop) {
+        @include app.body1-text-style(normal);
+        & {
+          margin-top: app.space(none);
+          margin-bottom: app.space(none);
+        }
+      }
+
+      @include app.mq(desktopHD) {
+        @include app.body1-text-style(normal);
+        & {
+          margin-top: app.space(none);
+          margin-bottom: app.space(none);
+        }
+      }
+      @include app.mq(desktopTV) {
+        @include app.body1-text-style(normal);
+        & {
+          margin-top: app.space(none);
+          margin-bottom: app.space(none);
+        }
+      }
+    }
+
+    &:not(.select--multiple)::after {
+      content: '';
+      justify-self: end;
+      position: absolute;
+      right: 1.5rem;
+      width: 0.8em;
+      height: 0.5em;
+      background-color: var(--select-arrow);
+      z-index: 0;
+      clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    }
+
+    @include app.mq(mobileSm) {
+    }
+
+    @include app.mq(mobileMd) {
+    }
+
+    @include app.mq(mobileLg) {
+    }
+
+    @include app.mq(tablet) {
+    }
+
+    @include app.mq(laptop) {
+      padding: app.space('extra-tight') app.space('base');
+    }
+
+    @include app.mq(laptopLg) {
+      padding: app.space('extra-tight') app.space('base');
+    }
+
+    @include app.mq(desktop) {
+      padding: app.space('extra-tight') app.space('base');
+    }
+
+    @include app.mq(desktopHD) {
+      padding: app.space('extra-tight') app.space('base');
+    }
+
+    @include app.mq(desktopTV) {
+      padding: app.space('extra-tight') app.space('base');
+    }
+  }
+
+  select,
+  &::after {
+    grid-area: select;
+  }
+
+  select:focus + .focus {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid var(--select-focus);
+    border-radius: inherit;
+  }
+
+  select[multiple] {
+    padding-right: 0;
+    height: 6rem;
+
+    option {
+      white-space: normal;
+      outline-color: var(--select-focus);
+    }
+  }
+
+  .select--disabled {
+    cursor: not-allowed;
+    background-color: #eee;
+  }
+
+  label {
+    margin: {
+      top: 0.5rem;
+      bottom: 0rem;
+    }
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .select + label {
+    margin-top: 2rem;
+  }
+
+  > a {
+    @include app.H1-text-style();
+    & {
+      text-decoration: none;
+    }
+
+    @include app.mq(mobileSm) {
+    }
+
+    @include app.mq(mobileMd) {
+    }
+
+    @include app.mq(mobileLg) {
+    }
+
+    @include app.mq(tablet) {
+    }
+
+    @include app.mq(laptop) {
+      @include app.body1-text-style(normal);
+    }
+
+    @include app.mq(laptopLg) {
+      @include app.body1-text-style(normal);
+    }
+
+    @include app.mq(desktop) {
+      @include app.body1-text-style(normal);
+    }
+
+    @include app.mq(desktopHD) {
+      @include app.body1-text-style(normal);
+    }
+
+    @include app.mq(desktopTV) {
+      @include app.body1-text-style(normal);
+    }
+  }
+}
+
+.menuIndexItemActive {
+  @extend .menuIndexItem;
+  & > a {
+    &:after {
+      height: app.em(app.space(bit-loose));
+      left: app.em(app.space(extra-tight));
+      border-radius: app.em(app.space(base)) app.em(app.space(bit-tight));
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  @include app.mq(mobileSm) {
+  }
+
+  @include app.mq(mobileMd) {
+  }
+
+  @include app.mq(mobileLg) {
+  }
+
+  @include app.mq(tablet) {
+  }
+
+  @include app.mq(laptop) {
+  }
+
+  @include app.mq(laptopLg) {
+  }
+
+  @include app.mq(desktop) {
+  }
+
+  @include app.mq(desktopHD) {
+  }
+
+  @include app.mq(desktopTV) {
+  }
+}

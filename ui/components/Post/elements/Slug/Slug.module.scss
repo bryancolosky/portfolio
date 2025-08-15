@@ -1,0 +1,24 @@
+@use '@/ui/styles/app.scss';
+
+.slug {
+  @include app.caption-text-style;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+}

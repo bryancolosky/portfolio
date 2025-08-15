@@ -1,0 +1,29 @@
+@use '@/ui/styles/app.scss';
+
+.carousel {
+  padding: app.space(base);
+  margin: app.space(loose) auto;
+  position: relative;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    padding: app.space(base);
+  }
+  @include app.mq(laptop) {
+    padding: app.space(base);
+  }
+  @include app.mq(laptopLg) {
+    padding: app.space(base);
+  }
+  @include app.mq(desktop) {
+    padding: app.space(base);
+  }
+  @include app.mq(desktopHD) {
+    padding: app.space(base);
+  }
+}

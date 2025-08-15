@@ -1,0 +1,588 @@
+@use 'sass:meta';
+@use 'app.scss';
+
+@include meta.load-css('normalize.css/normalize');
+
+:root {
+  --space-none: #{app.space(none)};
+  --space-hairline: #{app.space(hairline)};
+  --space-super-tight: #{app.space(super-tight)};
+  --space-extra-tight: #{app.space(extra-tight)};
+  --space-tight: #{app.space(tight)};
+  --space-bit-tight: #{app.space(bit-tight)};
+  --space-base: #{app.space(base)};
+  --space-bit-loose: #{app.space(bit-loose)};
+  --space-loose: #{app.space(loose)};
+  --space-extra-loose: #{app.space(extra-loose)};
+  --space-super-loose: #{app.space(super-loose)};
+  --space-jumbo: #{app.space(jumbo)};
+
+  --color-teal: #{app.$color-teal};
+  --color-aqua: #{app.$color-aqua};
+  --color-navy: #{app.$color-navy};
+  --color-dark-blue: #{app.$color-dark-blue};
+  --color-blue: #{app.$color-blue};
+  --color-light-blue: #{app.$color-light-blue};
+  --color-lightest-blue: #{app.$color-lightest-blue};
+  --color-washed-blue: #{app.$color-washed-blue};
+  --color-forest: #{app.$color-forest};
+  --color-dark-green: #{app.$color-dark-green};
+  --color-olive: #{app.$color-olive};
+  --color-lime: #{app.$color-lime};
+  --color-green: #{app.$color-green};
+  --color-light-green: #{app.$color-light-green};
+  --color-washed-green: #{app.$color-washed-green};
+  --color-maroon: #{app.$color-maroon};
+  --color-dark-red: #{app.$color-dark-red};
+  --color-red: #{app.$color-red};
+  --color-gold: #{app.$color-gold};
+  --color-light-red: #{app.$color-light-red};
+  --color-washed-red: #{app.$color-washed-red};
+  --color-orange: #{app.$color-orange};
+  --color-rust: #{app.$color-rust};
+  --color-brown: #{app.$color-brown};
+  --color-tangerine: #{app.$color-tangerine};
+  --color-yellow: #{app.$color-yellow};
+  --color-light-yellow: #{app.$color-light-yellow};
+  --color-washed-yellow: #{app.$color-washed-yellow};
+  --color-fuchsia: #{app.$color-fuchsia};
+  --color-purple: #{app.$color-purple};
+  --color-light-purple: #{app.$color-light-purple};
+  --color-lightest-purple: #{app.$color-lightest-purple};
+  --color-washed-purple: #{app.$color-washed-purple};
+  --color-dark-pink: #{app.$color-dark-pink};
+  --color-hot-pink: #{app.$color-hot-pink};
+  --color-pink: #{app.$color-pink};
+  --color-light-pink: #{app.$color-light-pink};
+  --color-lightest-pink: #{app.$color-lightest-pink};
+  --color-washed-pink: #{app.$color-washed-pink};
+  --color-black: #{app.$color-black};
+  --color-near-black: #{app.$color-near-black};
+  --color-dark-gray: #{app.$color-dark-gray};
+  --color-mid-gray: #{app.$color-mid-gray};
+  --color-gray: #{app.$color-gray};
+  --color-silver: #{app.$color-silver};
+  --color-light-silver: #{app.$color-light-silver};
+  --color-moon-gray: #{app.$color-moon-gray};
+  --color-light-gray: #{app.$color-light-gray};
+  --color-near-white: #{app.$color-near-white};
+  --color-white: #{app.$color-white};
+
+  --text-color: #{app.$text-color};
+  --link-color: #{app.$active-color};
+  --link-color-hover: #{app.$active-color-hover};
+
+  --button-background: #{app.$button-bg};
+
+  --font-family: #{app.$font-family};
+  --font-size-base: #{app.$font-size-base};
+  @include app.rfs(app.fontSize(h1), --headings-font-size-h1);
+  @include app.rfs(app.fontSize(h2), --headings-font-size-h2);
+  @include app.rfs(app.fontSize(h3), --headings-font-size-h3);
+  @include app.rfs(app.fontSize(h4), --headings-font-size-h4);
+  @include app.rfs(app.fontSize(h5), --headings-font-size-h5);
+  @include app.rfs(app.fontSize(h6), --headings-font-size-h6);
+  @include app.rfs(app.fontSize(body1), --body1-font-size);
+  @include app.rfs(app.fontSize(body2), --body2-font-size);
+  @include app.rfs(app.fontSize(subtitle1), --subtitle1-font-size);
+  @include app.rfs(app.fontSize(subtitle2), --subtitle2-font-size);
+  @include app.rfs(app.fontSize(overline), --font-size-overline);
+  @include app.rfs(app.fontSize(caption), --font-size-caption);
+  @include app.rfs(app.fontSize(lead), --font-size-lead);
+  @include app.rfs(app.fontSize(fine), --font-size-fine);
+  @include app.rfs(app.fontSize(micro), --font-size-micro);
+  @include app.rfs(app.fontSize(button), --font-size-button);
+
+  @include app.appearance;
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-appearance='light'] {
+    color-scheme: light;
+    @include app.appearance;
+  }
+}
+
+:root[data-appearance='dark'] {
+  color-scheme: dark;
+  @include app.appearance(false);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root[data-appearance='dark'] {
+    color-scheme: dark;
+    @include app.appearance(false);
+  }
+}
+
+*,
+html {
+  box-sizing: border-box;
+  margin: app.space(none);
+  padding: app.space(none);
+}
+
+body {
+  --body-font-family: var(--font-inter);
+  --body-color: var(--text-color);
+  --body-background: var(--app-background);
+  width: 100%;
+  color: var(--body-color);
+  background: var(--body-background);
+  font-family: var(--body-font-family);
+  margin: 0;
+  @include app.rfs(app.$font-size-base, --body-font-size);
+
+  @extend html;
+}
+
+h1 {
+  @include app.H1-text-style;
+  margin: app.space(base) app.space(none);
+  color: var(--body-color);
+}
+
+h2 {
+  @include app.H2-text-style;
+  margin: app.space(bit-tight) app.space(none);
+  color: var(--body-color);
+}
+
+h3 {
+  @include app.H3-text-style;
+  margin: app.space(tight) app.space(none);
+  color: var(--body-color);
+}
+
+h4 {
+  @include app.H4-text-style;
+  margin: app.space(extra-tight) app.space(none);
+  color: var(--body-color);
+}
+
+h5 {
+  @include app.H5-text-style;
+  margin: app.space(extra-tight) app.space(none);
+  color: var(--body-color);
+}
+
+h6 {
+  @include app.H6-text-style;
+  margin: app.space(super-tight) app.space(none);
+  color: var(--body-color);
+}
+
+p {
+  @include app.body1-text-style;
+  max-width: #{app.$max-width};
+}
+
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  text-decoration: none;
+  outline: 0;
+  cursor: pointer;
+  @include app.link-text-style;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  outline: none;
+}
+
+:-moz-focusring {
+  outline: auto;
+}
+
+button,
+[role='button'] {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: default;
+}
+
+button {
+  @include app.button-text-style;
+
+  & {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+img {
+  border-radius: 1rem;
+}
+
+blockquote {
+  max-width: #{app.$max-width};
+  display: block;
+  margin-top: app.space(super-loose);
+  margin-bottom: app.space(super-loose);
+  padding: app.space(super-loose) app.space(super-loose);
+  color: var(--blockquote-text);
+  background-color: var(--blockquote-background);
+  border-radius: app.space(base);
+  position: relative;
+
+  &::after {
+    content: '"';
+    color: var(--blockquote);
+    padding-right: app.space(bit-tight);
+    @include app.H1-text-style;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+  > p {
+    @include app.lead-text-style;
+  }
+}
+
+code {
+  font-size: var(--font-size-base);
+  background-color: var(--code-background);
+  color: var(--code-color);
+  border-radius: 0.25rem;
+  padding: {
+    right: app.space(tight);
+    left: app.space(tight);
+  }
+  padding: {
+    top: app.space(extra-tight);
+    bottom: app.space(extra-tight);
+  }
+}
+
+pre {
+  position: relative;
+  margin: app.space(extra-loose) 0;
+  background-color: var(--pre-background);
+  color: var(--pre-color);
+  border-radius: 0.25rem;
+  padding: {
+    right: app.space(bit-tight);
+    left: app.space(bit-tight);
+  }
+  padding: {
+    top: app.space(base);
+    bottom: app.space(base);
+  }
+  > code {
+    padding: app.space(none);
+    background-color: transparent;
+    color: var(--pre-color);
+  }
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
+  &::after {
+    content: '</>';
+    padding-left: app.space(bit-tight);
+    transform: translate(0%, -100%);
+    @include app.H4-text-style;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+}
+
+img {
+  width: auto;
+}
+
+hr {
+  border: var(--divider-color) solid 0.25rem;
+  border-radius: 0.125rem;
+  margin: {
+    top: app.space(extra-loose);
+    bottom: app.space(extra-loose);
+  }
+}
+
+.table {
+  background-color: var(--table-background);
+
+  col[class*='col-'] {
+    position: static;
+    display: table-column;
+    float: none;
+  }
+
+  td,
+  th {
+    &[class*='col-'] {
+      position: static;
+      display: table-cell;
+      float: none;
+    }
+  }
+}
+
+caption.caption {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: var(--color-gray);
+  text-align: left;
+}
+
+table.table {
+  color: var(--table-text);
+  border-radius: 0.5rem;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: 1.25rem;
+        line-height: 1.1;
+        vertical-align: top;
+        border-top: 1px solid var(--table-border);
+        text-align: left;
+      }
+      &:last-child {
+        border-radius: 0 0.5rem;
+
+        > td {
+          &:first-of-type {
+            border-bottom-left-radius: 0.5rem;
+          }
+        }
+        > td {
+          &:last-of-type {
+            border-bottom-right-radius: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+  > thead > tr > th {
+    vertical-align: bottom;
+    color: var(--table-head);
+    @include app.H6-text-style;
+    background-color: var(--table-head-background);
+    border-bottom: 2px solid var(--table-border);
+
+    &:first-of-type {
+      border-radius: 0.5rem 0 0 0;
+    }
+
+    &:last-of-type {
+      border-radius: 0 0.5rem 0 0;
+    }
+  }
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+
+  > tbody + tbody {
+    border-top: 2px solid var(--table-border);
+  }
+
+  .table {
+    background-color: var(--table-background);
+  }
+}
+
+.table-condensed {
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: 0.75rem;
+      }
+    }
+  }
+}
+
+.table-bordered {
+  border-collapse: separate;
+  border: 0;
+  border-spacing: 0;
+  box-shadow: 0 0 0 0.5rem var(--table-border);
+
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border-collapse: collapse;
+        border-spacing: -1px;
+        border-left: 1px solid var(--table-border);
+      }
+    }
+  }
+  > thead > tr {
+    > th,
+    > td {
+      border-bottom-width: 2px;
+    }
+
+    &:last-child {
+      border-radius: 0 0.5rem;
+
+      > td {
+        &:first-of-type {
+          border-bottom-left-radius: 0.5rem;
+        }
+      }
+      > td {
+        &:last-of-type {
+          border-bottom-right-radius: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.table-striped {
+  > tbody > tr {
+    &:last-child {
+      border-radius: 0 0.5rem;
+
+      > td {
+        &:first-of-type {
+          border-bottom-left-radius: 0.5rem;
+        }
+      }
+      > td {
+        &:last-of-type {
+          border-bottom-right-radius: 0.5rem;
+        }
+      }
+    }
+
+    &:nth-of-type(odd) {
+      background-color: var(--table-stripe);
+    }
+  }
+}
+
+.table-hover {
+  > tbody > tr:hover {
+    background-color: var(--table-hover);
+  }
+}
+
+.table-responsive {
+  min-height: 0.01%;
+  overflow-x: auto;
+
+  @media screen and (max-width: '1440px') {
+    width: 100%;
+    margin-bottom: 1.25rem;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+
+    > .table {
+      margin-bottom: 0;
+
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th,
+          > td {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    > .table-bordered {
+      border: 0;
+
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th:first-child,
+          > td:first-child {
+            border-left: 0;
+          }
+          > th:last-child,
+          > td:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      > tbody,
+      > tfoot {
+        > tr:last-child {
+          > th,
+          > td {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ==========
+// 🔌 Vendors
+// ==========
+
+// 🔌 Vendors
+
+// Import flickity
+@import 'flickity/css/flickity.css';
+@import 'flickity-fullscreen/fullscreen.css';

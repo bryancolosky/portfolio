@@ -1,0 +1,100 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations ⚡️ / Typography 🖋 / Type Settings" />
+
+export const typography = {
+  type: {
+    Inter: 'var(--font-inter), sans-serif',
+    PermanentMarker: 'var(--font-permanent-marker), sans-serif'
+  },
+  weight: {
+    regular: '400',
+    bold: '700'
+  },
+  size: {
+    micro: 10,
+    fine: 11,
+    caption: 12,
+    body2: 14,
+    body1: 16,
+    lead: 18,
+    subtitle2: 20,
+    subtitle1: 24,
+    h6: 20,
+    h5: 24,
+    h4: 28,
+    h3: 36,
+    h2: 48,
+    h1: 72
+  }
+};
+
+export const SampleText =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+# Typography
+
+## Typefaces
+
+**Sans Serif Font:** Inter
+**Display Font:** Permanent Marker
+
+### Inter
+
+Body text, leads, and captions.
+**Weights:** 400 (regular), 700 (bold)
+
+<Typeset
+  fontSizes={[Number(typography.size.body1)]}
+  fontWeight={typography.weight.regular}
+  sampleText={SampleText}
+  fontFamily={typography.type.Inter}
+/>
+
+### Permanent Marker
+
+Headings and emphasis.
+**Weights:** 700 (bold)
+
+<Typeset
+  fontSizes={[Number(typography.size.body1)]}
+  fontWeight={typography.weight.bold}
+  sampleText={SampleText}
+  fontFamily={typography.type.PermanentMarker}
+/>
+
+## Type Settings
+
+### Body Text
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.micro),
+    Number(typography.size.fine),
+    Number(typography.size.caption),
+    Number(typography.size.body2),
+    Number(typography.size.body1),
+    Number(typography.size.subtitle2),
+    Number(typography.size.subtitle1),
+    Number(typography.size.lead)
+  ]}
+  fontWeight={typography.weight.regular}
+  sampleText={SampleText}
+  fontFamily={typography.type.Inter}
+/>
+
+### Headings and Titles
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.h6),
+    Number(typography.size.h5),
+    Number(typography.size.h4),
+    Number(typography.size.h3),
+    Number(typography.size.h2),
+    Number(typography.size.h1)
+  ]}
+  fontWeight={typography.weight.bold}
+  sampleText={SampleText}
+  fontFamily={typography.type.PermanentMarker}
+/>

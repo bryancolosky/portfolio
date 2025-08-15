@@ -1,0 +1,73 @@
+@use '../../styles/app.scss';
+
+.media {
+  width: 100%;
+  position: relative;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  margin: {
+    top: app.space(base);
+    bottom: app.space(base);
+  }
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    margin: {
+      top: app.space(bit-loose);
+      bottom: app.space(bit-loose);
+    }
+  }
+  @include app.mq(laptop) {
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+  }
+  @include app.mq(laptopLg) {
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+  }
+  @include app.mq(desktop) {
+    margin: {
+      top: app.space(extra-loose);
+      bottom: app.space(extra-loose);
+    }
+  }
+  @include app.mq(desktopHD) {
+    margin: {
+      top: app.space(super-loose);
+      bottom: app.space(super-loose);
+    }
+  }
+}
+
+.figureImg {
+  width: 100%;
+  border-radius: app.space(base);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+.figurePic {
+  width: 100%;
+}
+
+.figureCaption,
+.figurePicCaption {
+  position: absolute;
+  top: app.space(base);
+  left: 0;
+  -webkit-writing-mode: vertical-rl;
+  writing-mode: vertical-rl;
+}

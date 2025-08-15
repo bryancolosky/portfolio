@@ -1,0 +1,24 @@
+import { Meta, Markdown } from '@storybook/addon-docs/blocks';
+
+import README from '../README.md?raw';
+
+import Text, { typeSettings } from '../ui/components/Typography';
+import Link from '../ui/components/Link';
+
+<Meta title="Foundations ⚡️ / Readme 📒" />
+
+<Markdown
+  children={README}
+  options={{
+    overrides: {
+      h1: typeSettings.h1,
+      h2: typeSettings.h2,
+      h3: typeSettings.h3,
+      h4: typeSettings.h4,
+      h5: typeSettings.h5,
+      h6: typeSettings.h6,
+      pre: typeSettings.pre,
+      p: typeSettings.p
+    }
+  }}
+/>

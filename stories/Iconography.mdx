@@ -1,0 +1,53 @@
+import { Meta, Title, IconGallery, IconItem } from '@storybook/addon-docs/blocks';
+
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
+  LogoGitHubIcon,
+  LogoInstagramIcon,
+  LogoLinkedInIcon,
+  LogoXIcon
+} from '../ui/components/Icon/Icons';
+
+import Icon from '../ui/components/Icon';
+
+<Meta title="Components 🔋 / Icons 🧩 / Iconography" />
+
+# Iconography
+
+### Directional
+
+<IconGallery>
+  <IconItem name="ArrowLeft">
+    <Icon source={ArrowLeftIcon} />
+  </IconItem>
+  <IconItem name="ArrowRight">
+    <Icon source={ArrowRightIcon} />
+  </IconItem>
+  <IconItem name="ChevronUp">
+    <Icon source={ChevronUpIcon} />
+  </IconItem>
+  <IconItem name="ChevronDown">
+    <Icon source={ChevronDownIcon} />
+  </IconItem>
+
+</IconGallery>
+
+### Vendors
+
+<IconGallery>
+  <IconItem name="LogoInstagram">
+    <Icon source={LogoInstagramIcon} />
+  </IconItem>
+  <IconItem name="LogoGitHub">
+    <Icon source={LogoGitHubIcon} />
+  </IconItem>
+  <IconItem name="LogoX">
+    <Icon source={LogoXIcon} />
+  </IconItem>
+  <IconItem name="LogoLinkedIn">
+    <Icon source={LogoLinkedInIcon} />
+  </IconItem>
+</IconGallery>

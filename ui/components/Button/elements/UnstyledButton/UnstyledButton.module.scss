@@ -1,0 +1,46 @@
+@use '@/ui/styles/app.scss';
+
+.unstyledButton {
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    margin: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+  @include app.mq(laptop) {
+    margin: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+  @include app.mq(laptopLg) {
+    margin: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+  @include app.mq(desktop) {
+    margin: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+  @include app.mq(desktopHD) {
+    margin: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+  @include app.mq(desktopTV) {
+    margin: {
+      right: app.space(super-loose);
+      left: app.space(super-loose);
+    }
+  }
+}

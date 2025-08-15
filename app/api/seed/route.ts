@@ -1,4 +1,4 @@
-import { db, products } from 'lib/db';
+import { db, photographs } from 'lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -7,14 +7,14 @@ export async function GET() {
     message: 'Uncomment to seed data after DB is set up.'
   });
 
-  await db.insert(products).values([
+  await db.insert(photographs).values([
     {
       id: 1,
       imageUrl:
         'https://uwja77bygk2kgfqe.public.blob.vercel-storage.com/smartphone-gaPvyZW6aww0IhD3dOpaU6gBGILtcJ.webp',
-      name: 'Smartphone X Pro',
+      name: 'Apple iPhone 17 Pro',
       status: 'active',
-      price: '999.00',
+      price: '1999.00',
       stock: 150,
       availableAt: new Date()
     },

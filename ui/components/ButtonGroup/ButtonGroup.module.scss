@@ -1,0 +1,110 @@
+@use '@/ui/styles/app.scss';
+
+.buttonGroup {
+  --button-group-item: 10;
+  --button-group-focused: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: calc(-1 * #{app.space(extra-tight)});
+  margin-left: calc(-1 * #{app.space(extra-tight)});
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+}
+
+.item {
+  margin-top: #{app.space(super-tight)};
+  margin-left: #{app.space(super-tight)};
+}
+
+.item-plain {
+  &:not(:first-child) {
+    margin-left: #{app.space(super-tight)};
+  }
+
+  &:not(:last-child) {
+    margin-right: #{app.space(super-tight)};
+  }
+}
+
+.variantSegmented {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 0;
+  margin-left: 0;
+
+  .item {
+    position: relative;
+    margin-top: 0;
+    margin-left: 0;
+    line-height: 1;
+
+    &:not(:first-child) {
+      margin-left: calc(-1 * #{app.space(super-tight)});
+    }
+  }
+
+  [aria-pressed='true'] {
+    z-index: var(--button-group-item);
+  }
+
+  .item-focused {
+    z-index: var(--button-group-focused);
+  }
+}
+
+.fullWidth {
+  .item {
+    flex: 1 1 auto;
+  }
+}
+
+.extraTight {
+  margin-top: calc(-1 * #{app.space(extra-tight)});
+  margin-left: calc(-1 * #{app.space(extra-tight)});
+
+  .item {
+    margin-top: #{app.space(extra-tight)};
+    margin-left: #{app.space(extra-tight)};
+  }
+}
+
+.tight {
+  margin-top: calc(-1 * #{app.space(tight)});
+  margin-left: calc(-1 * #{app.space(tight)});
+
+  .item {
+    margin-top: #{app.space(tight)};
+    margin-left: #{app.space(tight)};
+  }
+}
+
+.loose {
+  margin-top: calc(-1 * #{app.space(loose)});
+  margin-left: calc(-1 * #{app.space(loose)});
+
+  .item {
+    margin-top: #{app.space(loose)};
+    margin-left: #{app.space(loose)};
+  }
+}
+
+.noWrap {
+  display: flex;
+  flex-wrap: nowrap;
+}

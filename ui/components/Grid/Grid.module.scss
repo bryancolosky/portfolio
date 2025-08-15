@@ -1,0 +1,93 @@
+@use '@/ui/styles/app.scss';
+
+.grid {
+  --grid-areas-mobile-s: initial;
+  --grid-areas-mobile-m: var(--grid-areas-mobile-s);
+  --grid-areas-mobile-l: var(--grid-areas-mobile-m);
+  --grid-areas-tablet: var(--grid-areas-mobile-l);
+  --grid-areas-laptop: var(--grid-areas-tablet);
+  --grid-areas-laptop-l: var(--grid-areas-laptop);
+  --grid-areas-desktop: var(--grid-areas-laptop-l);
+  --grid-areas-desktop-hd: var(--grid-areas-desktop);
+  --grid-areas-desktop-tv: var(--grid-areas-desktop-hd);
+  --grid-columns-mobile-s: 6;
+  --grid-columns-mobile-m: var(--grid-columns-mobile-s);
+  --grid-columns-mobile-l: var(--grid-columns-mobile-m);
+  --grid-columns-tablet: var(--grid-columns-mobile-l);
+  --grid-columns-laptop: 12;
+  --grid-columns-laptop: var(--grid-columns-tablet);
+  --grid-columns-laptop-l: var(--grid-columns-laptop);
+  --grid-columns-desktop: var(--grid-columns-laptop-l);
+  --grid-columns-desktop-hd: var(--grid-columns-desktop);
+  --grid-columns-desktop-tv: var(--grid-columns-desktop-hd);
+
+  gap: var(--grid-gap-mobile-s, var(--space-base));
+  grid-template-areas: var(--grid-areas-mobile-s);
+  grid-template-columns: repeat(var(--grid-columns-mobile-s), minmax(0, 1fr));
+  display: grid;
+
+  @include app.responsive-custom-property('grid', 'gap', 'space');
+
+  @include app.mq(mobileSm) {
+    gap: var(--grid-gap-mobile-s, var(--space-base));
+    grid-template-areas: var(--grid-areas-mobile-s);
+    grid-template-columns: repeat(
+      var(--grid-columns-mobile-s,),
+      minmax(0, 1fr)
+    );
+  }
+
+  @include app.mq(mobileMd) {
+    gap: var(--grid-gap-mobile-m, var(--space-base));
+    grid-template-areas: var(--grid-areas-mobile-m);
+    grid-template-columns: repeat(var(--grid-columns-sm), minmax(0, 1fr));
+  }
+
+  @include app.mq(mobileLg) {
+    gap: var(--grid-gap-mobile-l, var(--space-base));
+    grid-template-areas: var(--grid-areas-mobile-l);
+    grid-template-columns: repeat(var(--grid-columns-mobile-l), minmax(0, 1fr));
+  }
+
+  @include app.mq(tablet) {
+    gap: var(--grid-gap-tablet, var(--space-base));
+    grid-template-areas: var(--grid-areas-tablet);
+    grid-template-columns: repeat(var(--grid-columns-tablet), minmax(0, 1fr));
+  }
+
+  @include app.mq(laptop) {
+    gap: var(--grid-gap-laptop, var(--space-base));
+    grid-template-areas: var(--grid-areas-laptop);
+    grid-template-columns: repeat(var(--grid-columns-laptop), minmax(0, 1fr));
+  }
+
+  @include app.mq(laptopLg) {
+    gap: var(--grid-gap-laptop-l, var(--space-base));
+    grid-template-areas: var(--grid-areas-laptop-l);
+    grid-template-columns: repeat(var(--grid-columns-laptop-l), minmax(0, 1fr));
+  }
+
+  @include app.mq(desktop) {
+    gap: var(--grid-gap-desktop, var(--space-base));
+    grid-template-areas: var(--grid-areas-desktop);
+    grid-template-columns: repeat(var(--grid-columns-desktop), minmax(0, 1fr));
+  }
+
+  @include app.mq(desktopHD) {
+    gap: var(--grid-gap-desktop-hd, var(--space-base));
+    grid-template-areas: var(--grid-areas-desktop-hd);
+    grid-template-columns: repeat(
+      var(--grid-columns-desktop-hd),
+      minmax(0, 1fr)
+    );
+  }
+
+  @include app.mq(desktopTV) {
+    gap: var(--grid-gap-desktop-tv, var(--space-base));
+    grid-template-areas: var(--grid-areas-desktop-tv);
+    grid-template-columns: repeat(
+      var(--grid-columns-desktop-tv),
+      minmax(0, 1fr)
+    );
+  }
+}

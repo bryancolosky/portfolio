@@ -1,0 +1,28 @@
+@use '@/ui/styles/app.scss';
+
+.title {
+  @include app.H5-text-style;
+  margin: app.space(none);
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    @include app.H4-text-style;
+  }
+  @include app.mq(laptop) {
+    @include app.H4-text-style;
+  }
+  @include app.mq(laptopLg) {
+    @include app.H4-text-style;
+  }
+  @include app.mq(desktop) {
+    @include app.H3-text-style;
+  }
+  @include app.mq(desktopHD) {
+    @include app.H3-text-style;
+  }
+}

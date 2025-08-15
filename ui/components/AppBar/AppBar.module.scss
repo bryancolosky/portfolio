@@ -1,0 +1,71 @@
+@use '@/ui/styles/app.scss';
+
+.appBar {
+  --app-bar-font-family: var(--font-inter);
+  --app-bar-color: var(--text-color);
+  --app-bar-background-color: transparent;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  z-index: app.$z-max;
+  color: var(--app-bar-color);
+  background-color: var(--app-bar-background-color);
+  font-family: var(--app-bar-font-family);
+
+  @include app.mq(mobileSm) {
+    display: flex;
+  }
+  @include app.mq(mobileMd) {
+    display: flex;
+  }
+  @include app.mq(mobileLg) {
+    display: flex;
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+
+  @include app.mq(desktopTV) {
+  }
+}
+
+.appBarTray {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.6s ease-in-out;
+  will-change: transform, background-color;
+
+  &.visible {
+    transform: translateY(0%);
+  }
+
+  &.hidden {
+    transform: translateY(-100%);
+  }
+
+  &.pinned {
+    background-color: transparent;
+  }
+
+  &.unpinned {
+    background-color: var(--app-background);
+  }
+}

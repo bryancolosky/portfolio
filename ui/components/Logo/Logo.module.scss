@@ -1,0 +1,47 @@
+@use '@/ui/styles/app.scss';
+
+/* 🌟 Logo */
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+
+  svg {
+    margin-right: var(--space-base);
+
+    & image {
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+  .logoTitle {
+    color: var(--body-color);
+    margin: 0 0 0 app.space(tight);
+    @include app.subtitle1-text-style;
+    @include app.lead-text-style;
+  }
+
+  &:focus,
+  &:active {
+    outline: 1px dotted var(--body-color);
+  }
+
+  &:hover {
+    svg {
+      transform: none;
+      transition: none;
+
+      & image {
+        transform: scale(1);
+        transition: all 0.2s ease-in-out;
+      }
+    }
+  }
+
+  &:after {
+    display: none;
+  }
+}

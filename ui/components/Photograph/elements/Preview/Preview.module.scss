@@ -1,0 +1,422 @@
+@use '@/ui/styles/app.scss';
+
+.preview {
+  width: 100%;
+  margin: space(loose) auto space(loose) auto;
+  position: relative;
+
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+  }
+  @include app.mq(laptop) {
+  }
+  @include app.mq(laptopLg) {
+  }
+  @include app.mq(desktop) {
+  }
+  @include app.mq(desktopHD) {
+  }
+
+  &.previewHero {
+    padding: calc(space(bit-loose) * 2) space(bit-loose);
+
+    @include app.mq(mobileSm) {
+    }
+    @include app.mq(mobileMd) {
+    }
+    @include app.mq(mobileLg) {
+    }
+    @include app.mq(tablet) {
+      padding: app.space(extra-loose) app.space(super-loose);
+    }
+    @include app.mq(laptop) {
+      padding: app.space(extra-loose) app.space(super-loose);
+    }
+    @include app.mq(laptopLg) {
+      padding: app.space(extra-loose) app.space(super-loose);
+    }
+    @include app.mq(desktop) {
+      padding: app.space(extra-loose) calc(app.space(super-loose) * 4);
+    }
+    @include app.mq(desktopHD) {
+      padding: app.space(extra-loose) calc(app.space(super-loose) * 5);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      border-radius: app.space(super-loose);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    &.themeGreen {
+      &::after {
+        --color: var(--theme-green);
+        --post-background: var(--theme-green-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeViolet {
+      &::after {
+        --color: var(--theme-violet);
+        --post-background: var(--theme-violet-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeBlue {
+      &::after {
+        --color: var(--theme-blue);
+        --post-background: var(--theme-blue-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeRed {
+      &::after {
+        --color: var(--theme-red);
+        --post-background: var(--theme-red-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeOrange {
+      &::after {
+        --color: var(--theme-orange);
+        --post-background: var(--theme-orange-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeYellow {
+      &::after {
+        --color: var(--theme-yellow);
+        --post-background: var(--theme-yellow-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeIndigo {
+      &::after {
+        --color: var(--theme-indigo);
+        --post-background: var(--theme-indigo-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeTeal {
+      &::after {
+        --color: var(--theme-teal);
+        --post-background: var(--theme-teal-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeBlack {
+      &::after {
+        --color: var(--theme-black);
+        --post-background: var(--theme-black-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+
+    &.themeWhite {
+      &::after {
+        --color: var(--theme-white);
+        --post-background: var(--theme-white-bg);
+        background-color: var(--post-background);
+        fill: var(--color);
+      }
+    }
+  }
+
+  &.slide {
+    margin: 0 app.space(base);
+
+    @include app.mq(mobileSm) {
+    }
+    @include app.mq(mobileMd) {
+    }
+    @include app.mq(mobileLg) {
+    }
+    @include app.mq(tablet) {
+      margin: 0 calc(app.space(bit-loose) * 1.5);
+    }
+    @include app.mq(laptop) {
+      margin: 0 calc(app.space(loose) * 2);
+    }
+    @include app.mq(laptopLg) {
+      margin: 0 calc(app.space(extra-loose) * 2);
+    }
+    @include app.mq(desktop) {
+      margin: 0 calc(app.space(super-loose) * 2);
+    }
+    @include app.mq(desktopHD) {
+      margin: 0 calc(app.space(super-loose) * 2);
+    }
+  }
+}
+
+.media {
+  width: 100%;
+  position: relative;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  order: 1;
+  margin: {
+    top: app.space(base);
+    bottom: app.space(base);
+  }
+  @include app.mq(mobileSm) {
+  }
+  @include app.mq(mobileMd) {
+  }
+  @include app.mq(mobileLg) {
+  }
+  @include app.mq(tablet) {
+    margin: {
+      top: app.space(bit-loose);
+      bottom: app.space(bit-loose);
+    }
+  }
+  @include app.mq(laptop) {
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+  }
+  @include app.mq(laptopLg) {
+    margin: {
+      top: app.space(loose);
+      bottom: app.space(loose);
+    }
+  }
+  @include app.mq(desktop) {
+    margin: {
+      top: app.space(extra-loose);
+      bottom: app.space(extra-loose);
+    }
+  }
+  @include app.mq(desktopHD) {
+    margin: {
+      top: app.space(super-loose);
+      bottom: app.space(super-loose);
+    }
+  }
+
+  > .mediaFigure {
+    position: relative;
+    display: inline;
+
+    .figureClippath,
+    .figureDeco,
+    .figureImage {
+      transform-origin: 50% 50%;
+    }
+
+    .figureImage {
+      width: auto;
+      height: 100%;
+    }
+
+    > .themeGreen {
+      --color: var(--theme-green);
+      fill: var(--color);
+    }
+
+    > .themeViolet {
+      --color: var(--theme-violet);
+      fill: var(--color);
+    }
+
+    > .themeBlue {
+      --color: var(--theme-blue);
+      fill: var(--color);
+    }
+
+    > .themeRed {
+      --color: var(--theme-red);
+      fill: var(--color);
+    }
+
+    > .themeOrange {
+      --color: var(--theme-orange);
+      fill: var(--color);
+    }
+
+    > .themeYellow {
+      --color: var(--theme-yellow);
+      fill: var(--color);
+    }
+
+    > .themeIndigo {
+      --color: var(--theme-indigo);
+      fill: var(--color);
+    }
+
+    > .themeBlack {
+      --color: var(--theme-black);
+      fill: var(--color);
+    }
+
+    > .themeWhite {
+      --color: var(--theme-white);
+      fill: var(--color);
+    }
+  }
+}
+
+.body {
+  order: 2;
+
+  > .header {
+    > .meta,
+    > .title {
+      width: 100%;
+    }
+
+    > .title {
+      @include app.H5-text-style;
+      & {
+        margin: app.space(none);
+      }
+      @include app.mq(mobileSm) {
+      }
+      @include app.mq(mobileMd) {
+      }
+      @include app.mq(mobileLg) {
+      }
+      @include app.mq(tablet) {
+        @include app.H4-text-style;
+      }
+      @include app.mq(laptop) {
+        @include app.H4-text-style;
+      }
+      @include app.mq(laptopLg) {
+        @include app.H4-text-style;
+      }
+      @include app.mq(desktop) {
+        @include app.H3-text-style;
+      }
+      @include app.mq(desktopHD) {
+        @include app.H3-text-style;
+      }
+    }
+  }
+
+  > .overview {
+    max-width: app.space(super-loose) * 12;
+    display: none;
+
+    @include app.mq(mobileSm) {
+    }
+    @include app.mq(mobileMd) {
+    }
+    @include app.mq(mobileLg) {
+    }
+    @include app.mq(tablet) {
+    }
+    @include app.mq(laptop) {
+      display: flex;
+    }
+    @include app.mq(laptopLg) {
+      display: flex;
+    }
+    @include app.mq(desktop) {
+      display: flex;
+    }
+    @include app.mq(desktopHD) {
+      display: flex;
+    }
+  }
+
+  > .footer {
+    width: 100%;
+
+    > .postUrl {
+      @include app.caption-text-style;
+
+      @include app.mq(mobileSm) {
+      }
+      @include app.mq(mobileMd) {
+      }
+      @include app.mq(mobileLg) {
+      }
+      @include app.mq(tablet) {
+        @include app.body1-text-style;
+      }
+      @include app.mq(laptop) {
+        @include app.lead-text-style;
+      }
+      @include app.mq(laptopLg) {
+        @include app.lead-text-style;
+      }
+      @include app.mq(desktop) {
+        @include app.lead-text-style;
+      }
+      @include app.mq(desktopHD) {
+        @include app.lead-text-style;
+      }
+    }
+  }
+
+  > .header,
+  > .footer {
+    margin: app.space(base) 0;
+  }
+}
+
+.category {
+  @include app.overline-text-style;
+  & {
+    vertical-align: text-bottom;
+  }
+}
+
+// Article
+article.article,
+.article {
+  width: 100%;
+}
+
+.figureImg {
+  width: 100%;
+  border-radius: app.space(base);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+.figurePic {
+  width: 100%;
+}
+
+.figureCaption,
+.figurePicCaption {
+  width: 100%;
+  color: var(--text-subdued-color);
+  @include app.caption-text-style;
+}

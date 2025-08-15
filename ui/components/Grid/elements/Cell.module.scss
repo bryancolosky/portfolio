@@ -1,0 +1,102 @@
+@use '@/ui/styles/app.scss';
+
+.cell {
+  --row-mobile-s: initial;
+  --row-mobile-m: var(--row-mobile-s);
+  --row-mobile-l: var(--row-mobile-m);
+  --row-tablet: var(--row-mobile-l);
+  --row-laptop: var(--row-tablet);
+  --row-laptop-l: var(--row-laptop);
+  --row-desktop: var(--row-laptop-l);
+  --row-desktop-hd: var(--row-desktop);
+  --row-desktop-tv: var(--row-desktop-hd);
+  --column-mobile-s: initial;
+  --column-mobile-m: var(--column-mobile-s);
+  --column-mobile-l: var(--column-mobile-m);
+  --column-tablet: var(--column-mobile-l);
+  --column-laptop: var(--column-tablet);
+  --column-laptop-l: var(--column-laptop);
+  --column-desktop: var(--column-laptop-l);
+  --column-desktop-hd: var(--column-desktop);
+  --column-desktop-tv: var(--column-desktop-hd);
+  min-width: 0;
+  grid-row: var(--row-mobile-s);
+  grid-column: var(--column-mbile-s);
+  align-self: center;
+  display: inline;
+
+  @include app.mq(mobileSm) {
+    grid-row: var(--row-mobile-s);
+    grid-column: var(--column-mobile-s);
+  }
+
+  @include app.mq(mobileMd) {
+    grid-row: var(--row-mobile-m);
+    grid-column: var(--column-mobile-m);
+  }
+
+  @include app.mq(mobileLg) {
+    grid-row: var(--row-mobile-l);
+    grid-column: var(--column-mobile-l);
+  }
+
+  @include app.mq(tablet) {
+    grid-row: var(--row-tablet);
+    grid-column: var(--column-tablet);
+  }
+
+  @include app.mq(laptop) {
+    grid-row: var(--row-laptop);
+    grid-column: var(--column-laptop);
+  }
+
+  @include app.mq(laptopLg) {
+    grid-row: var(--row-laptop-l);
+    grid-column: var(--column-laptop-l);
+  }
+
+  @include app.mq(desktop) {
+    grid-row: var(--row-desktop);
+    grid-column: var(--column-desktop);
+  }
+
+  @include app.mq(desktopHD) {
+    grid-row: var(--row-desktop-hd);
+    grid-column: var(--column-desktop-hd);
+  }
+}
+
+$columns: 6;
+$breakpoints: (
+  mobile-m,
+  mobile-l,
+  tablet,
+  laptop,
+  laptop-l,
+  desktop,
+  desktop-hd,
+  desktop-tv
+);
+
+@mixin cell-column-end-rules($columns, $breakpoint) {
+  @for $column from 1 through $columns {
+    .cell-#{$column}-column-#{$breakpoint} {
+      grid-column-end: span #{$column};
+    }
+  }
+}
+
+@mixin wrap-in-breakpoint($breakpoints, $columns) {
+  @each $breakpoint in $breakpoints {
+    @media (--breakpoints-#{$breakpoint}-up) {
+      @include cell-column-end-rules($columns, $breakpoint);
+    }
+  }
+}
+
+@include cell-column-end-rules(6, mobile-s);
+@include wrap-in-breakpoint((mobile-s, mobile-m, mobile-l, tablet), 6);
+@include wrap-in-breakpoint(
+  (laptop, laptop-l, desktop, desktop-hd, desktop-tv),
+  12
+);

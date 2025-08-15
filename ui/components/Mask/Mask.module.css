@@ -1,0 +1,53 @@
+.decorationSvg {
+  position: relative;
+  display: inline;
+
+  > .figureDeco {
+    transform-origin: 50% 50%;
+  }
+
+  > .themeGreen {
+    --color: var(--theme-green);
+    fill: var(--color);
+  }
+
+  > .themeViolet {
+    --color: var(--theme-violet);
+    fill: var(--color);
+  }
+
+  > .themeBlue {
+    --color: var(--theme-blue);
+    fill: var(--color);
+  }
+
+  > .themeRed {
+    --color: var(--theme-red);
+    fill: var(--color);
+  }
+
+  > .themeOrange {
+    --color: var(--theme-orange);
+    fill: var(--color);
+  }
+
+  > .themeYellow {
+    --color: var(--theme-yellow);
+    fill: var(--color);
+  }
+
+  > .themeIndigo {
+    --color: var(--theme-indigo);
+    fill: var(--color);
+  }
+
+  > .themeBlack {
+    --color: var(--theme-black);
+    fill: var(--color);
+  }
+
+  > .themeWhite {
+    --color: var(--theme-white);
+    fill: var(--color);
+  }
+}

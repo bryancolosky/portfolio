@@ -18,7 +18,7 @@ export const db = drizzle(neon(process.env.POSTGRES_URL!));
 
 export const statusEnum = pgEnum('status', ['active', 'inactive', 'archived']);
 
-export const products = pgTable('products', {
+export const photographs = pgTable('photographs', {
   id: serial('id').primaryKey(),
   imageUrl: text('image_url').notNull(),
   name: text('name').notNull(),
@@ -28,45 +28,49 @@ export const products = pgTable('products', {
   availableAt: timestamp('available_at').notNull()
 });
 
-export type SelectProduct = typeof products.$inferSelect;
-export const insertProductSchema = createInsertSchema(products);
+export type SelectPhotograph = typeof photographs.$inferSelect;
+export const insertSchema = createInsertSchema(photographs);
 
-export async function getProducts(
+export async function getPhotographs(
   search: string,
   offset: number
 ): Promise<{
-  products: SelectProduct[];
+  photographs: SelectPhotograph[];
   newOffset: number | null;
-  totalProducts: number;
+  totalPhotographs: number;
 }> {
   // Always search the full table, not per page
   if (search) {
     return {
-      products: await db
+      photographs: await db
         .select()
-        .from(products)
-        .where(ilike(products.name, `%${search}%`))
+        .from(photographs)
+        .where(ilike(photographs.name, `%${search}%`))
         .limit(1000),
       newOffset: null,
-      totalProducts: 0
+      totalPhotographs: 0
     };
   }
 
   if (offset === null) {
-    return { products: [], newOffset: null, totalProducts: 0 };
+    return { photographs: [], newOffset: null, totalPhotographs: 0 };
   }
 
-  let totalProducts = await db.select({ count: count() }).from(products);
-  let moreProducts = await db.select().from(products).limit(5).offset(offset);
-  let newOffset = moreProducts.length >= 5 ? offset + 5 : null;
+  let totalPhotographs = await db.select({ count: count() }).from(photographs);
+  let morePhotographs = await db
+    .select()
+    .from(photographs)
+    .limit(5)
+    .offset(offset);
+  let newOffset = morePhotographs.length >= 5 ? offset + 5 : null;
 
   return {
-    products: moreProducts,
+    photographs: morePhotographs,
     newOffset,
-    totalProducts: totalProducts[0].count
+    totalPhotographs: totalPhotographs[0].count
   };
 }
 
-export async function deleteProductById(id: number) {
-  await db.delete(products).where(eq(products.id, id));
+export async function deletePhotographById(id: number) {
+  await db.delete(photographs).where(eq(photographs.id, id));
 }

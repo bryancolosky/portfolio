@@ -1,0 +1,1427 @@
+// ==========
+// 🎨 Stylesheet
+// ==========
+
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+
+// ==========
+// 🔌 Vendors
+// ==========
+
+// 🔌 Vendors
+
+// Import animate
+@include meta.load-css('~animate.css/animate');
+
+// ==========
+// 🧮 Functions
+// ==========
+
+// Base value
+$rfs-base-value: 1.25rem !default;
+$rfs-unit: rem !default;
+
+@if $rfs-unit != rem and $rfs-unit != px {
+  @error "`#{$rfs-unit}` is not a valid unit for $rfs-unit. Use `px` or `rem`.";
+}
+
+// Breakpoint at where values start decreasing if screen width is smaller
+$rfs-breakpoint: 1200px !default;
+$rfs-breakpoint-unit: px !default;
+
+@if $rfs-breakpoint-unit !=
+  px and
+  $rfs-breakpoint-unit !=
+  em and
+  $rfs-breakpoint-unit !=
+  rem
+{
+  @error "`#{$rfs-breakpoint-unit}` is not a valid unit for $rfs-breakpoint-unit. Use `px`, `em` or `rem`.";
+}
+
+// Resize values based on screen height and width
+$rfs-two-dimensional: false !default;
+
+// Factor of decrease
+$rfs-factor: 10 !default;
+
+@if meta.type-of($rfs-factor) != number or $rfs-factor <= 1 {
+  @error "`#{$rfs-factor}` is not a valid  $rfs-factor, it must be greater than 1.";
+}
+
+// Mode. Possibilities: "min-media-query", "max-media-query"
+$rfs-mode: min-media-query !default;
+
+// Generate enable or disable classes. Possibilities: false, "enable" or "disable"
+$rfs-class: false !default;
+
+// 1 rem = $rfs-rem-value px
+$rfs-rem-value: 16 !default;
+
+// Safari iframe resize bug: https://github.com/twbs/rfs/issues/14
+$rfs-safari-iframe-resize-bug-fix: false !default;
+
+// Disable RFS by setting $enable-rfs to false
+$enable-rfs: true !default;
+
+// Cache $rfs-base-value unit
+$rfs-base-value-unit: math.unit($rfs-base-value);
+
+// Remove px-unit from $rfs-base-value for calculations
+@if $rfs-base-value-unit == px {
+  $rfs-base-value: math.div($rfs-base-value, $rfs-base-value * 0 + 1);
+} @else if $rfs-base-value-unit == rem {
+  $rfs-base-value: math.div(
+    $rfs-base-value,
+    $rfs-base-value * 0 + math.div(1, $rfs-rem-value)
+  );
+}
+
+// Cache $rfs-breakpoint unit to prevent multiple calls
+$rfs-breakpoint-unit-cache: math.unit($rfs-breakpoint);
+
+// Remove unit from $rfs-breakpoint for calculations
+@if $rfs-breakpoint-unit-cache == px {
+  $rfs-breakpoint: math.div($rfs-breakpoint, $rfs-breakpoint * 0 + 1);
+} @else if
+  $rfs-breakpoint-unit-cache ==
+  rem or
+  $rfs-breakpoint-unit-cache ==
+  'em'
+{
+  $rfs-breakpoint: math.div(
+    $rfs-breakpoint,
+    $rfs-breakpoint * 0 + math.div(1, $rfs-rem-value)
+  );
+}
+
+// Calculate the media query value
+$rfs-mq-value: if(
+  $rfs-breakpoint-unit == px,
+  #{$rfs-breakpoint}px,
+  #{math.div($rfs-breakpoint, $rfs-rem-value)}#{$rfs-breakpoint-unit}
+);
+$rfs-mq-property-width: if($rfs-mode == max-media-query, max-width, min-width);
+$rfs-mq-property-height: if(
+  $rfs-mode == max-media-query,
+  max-height,
+  min-height
+);
+
+// Internal mixin used to determine which media query needs to be used
+@mixin rfs-media-query {
+  @if $rfs-two-dimensional {
+    @if $rfs-mode == max-media-query {
+      @media (#{$rfs-mq-property-width}: #{$rfs-mq-value}), (#{$rfs-mq-property-height}: #{$rfs-mq-value}) {
+        @content;
+      }
+    } @else {
+      @media (#{$rfs-mq-property-width}: #{$rfs-mq-value}) and (#{$rfs-mq-property-height}: #{$rfs-mq-value}) {
+        @content;
+      }
+    }
+  } @else {
+    @media (#{$rfs-mq-property-width}: #{$rfs-mq-value}) {
+      @content;
+    }
+  }
+}
+
+// Internal mixin that adds disable classes to the selector if needed.
+@mixin rfs-rule {
+  @if $rfs-class == disable and $rfs-mode == max-media-query {
+    // Adding an extra class increases specificity, which prevents the media query to override the property
+    &,
+    .disable-rfs &,
+    &.disable-rfs {
+      @content;
+    }
+  } @else if $rfs-class == enable and $rfs-mode == min-media-query {
+    .enable-rfs &,
+    &.enable-rfs {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Internal mixin that adds enable classes to the selector if needed.
+@mixin rfs-media-query-rule {
+  @if $rfs-class == enable {
+    @if $rfs-mode == min-media-query {
+      @content;
+    }
+
+    @include rfs-media-query {
+      .enable-rfs &,
+      &.enable-rfs {
+        @content;
+      }
+    }
+  } @else {
+    @if $rfs-class == disable and $rfs-mode == min-media-query {
+      .disable-rfs &,
+      &.disable-rfs {
+        @content;
+      }
+    }
+    @include rfs-media-query {
+      @content;
+    }
+  }
+}
+
+// Helper function to get the formatted non-responsive value
+@function rfs-value($values) {
+  // Convert to list
+  $values: if(meta.type-of($values) != list, ($values), $values);
+
+  $val: '';
+
+  // Loop over each value and calculate value
+  @each $value in $values {
+    @if $value == 0 {
+      $val: $val + ' 0';
+    } @else {
+      // Cache $value unit
+      $unit: if(meta.type-of($value) == 'number', math.unit($value), false);
+
+      @if $unit == px {
+        // Convert to rem if needed
+        $val: $val +
+          ' ' +
+          if(
+            $rfs-unit == rem,
+            #{math.div($value, $value * 0 + $rfs-rem-value)}rem,
+            $value
+          );
+      } @else if $unit == rem {
+        // Convert to px if needed
+        $val: $val +
+          ' ' +
+          if(
+            $rfs-unit == px,
+            #{math.div($value, $value * 0 + 1) * $rfs-rem-value}px,
+            $value
+          );
+      } @else {
+        // If $value isn't a number (like inherit) or $value has a unit (not px or rem, like 1.5em) or $ is 0, just print the value
+        $val: $val + ' ' + $value;
+      }
+    }
+  }
+
+  // Remove first space
+  @return string.unquote(string.slice($val, 2));
+}
+
+// Helper function to get the responsive value calculated by RFS
+@function rfs-fluid-value($values) {
+  // Convert to list
+  $values: if(meta.type-of($values) != list, ($values), $values);
+
+  $val: '';
+
+  // Loop over each value and calculate value
+  @each $value in $values {
+    @if $value == 0 {
+      $val: $val + ' 0';
+    } @else {
+      // Cache $value unit
+      $unit: if(meta.type-of($value) == 'number', math.unit($value), false);
+
+      // If $value isn't a number (like inherit) or $value has a unit (not px or rem, like 1.5em) or $ is 0, just print the value
+      @if not $unit or $unit != px and $unit != rem {
+        $val: $val + ' ' + $value;
+      } @else {
+        // Remove unit from $value for calculations
+        $value: math.div(
+          $value,
+          $value * 0 + if($unit == px, 1, math.div(1, $rfs-rem-value))
+        );
+
+        // Only add the media query if the value is greater than the minimum value
+        @if math.abs($value) <= $rfs-base-value or not $enable-rfs {
+          $val: $val +
+            ' ' +
+            if(
+              $rfs-unit == rem,
+              #{math.div($value, $rfs-rem-value)}rem,
+              #{$value}px
+            );
+        } @else {
+          // Calculate the minimum value
+          $value-min: $rfs-base-value +
+            math.div(math.abs($value) - $rfs-base-value, $rfs-factor);
+
+          // Calculate difference between $value and the minimum value
+          $value-diff: math.abs($value) - $value-min;
+
+          // Base value formatting
+          $min-width: if(
+            $rfs-unit == rem,
+            #{math.div($value-min, $rfs-rem-value)}rem,
+            #{$value-min}px
+          );
+
+          // Use negative value if needed
+          $min-width: if($value < 0, -$min-width, $min-width);
+
+          // Use `vmin` if two-dimensional is enabled
+          $variable-unit: if($rfs-two-dimensional, vmin, vw);
+
+          // Calculate the variable width between 0 and $rfs-breakpoint
+          $variable-width: #{math.div(
+              $value-diff * 100,
+              $rfs-breakpoint
+            )}#{$variable-unit};
+
+          // Return the calculated value
+          $val: $val +
+            ' calc(' +
+            $min-width +
+            if($value < 0, ' - ', ' + ') +
+            $variable-width +
+            ')';
+        }
+      }
+    }
+  }
+
+  // Remove first space
+  @return string.unquote(string.slice($val, 2));
+}
+
+// RFS mixin
+@mixin rfs($values, $property: font-size) {
+  @if $values != null {
+    $val: rfs-value($values);
+    $fluidVal: rfs-fluid-value($values);
+
+    // Do not print the media query if responsive & non-responsive values are the same
+    @if $val == $fluidVal {
+      & {
+        #{$property}: $val;
+      }
+    } @else {
+      @include rfs-rule {
+        & {
+          #{$property}: if($rfs-mode == max-media-query, $val, $fluidVal);
+        }
+
+        // Include safari iframe resize fix if needed
+        & {
+          min-width: if($rfs-safari-iframe-resize-bug-fix, (0 * 1vw), null);
+        }
+      }
+
+      @include rfs-media-query-rule {
+        & {
+          #{$property}: if($rfs-mode == max-media-query, $fluidVal, $val);
+        }
+      }
+    }
+  }
+}
+
+// Shorthand helper mixins
+@mixin ResponsiveFontSize($value) {
+  @include rfs($value);
+}
+
+@mixin padding($value) {
+  @include rfs($value, padding);
+}
+
+@mixin padding-top($value) {
+  @include rfs($value, padding-top);
+}
+
+@mixin padding-right($value) {
+  @include rfs($value, padding-right);
+}
+
+@mixin padding-bottom($value) {
+  @include rfs($value, padding-bottom);
+}
+
+@mixin padding-left($value) {
+  @include rfs($value, padding-left);
+}
+
+@mixin margin($value) {
+  @include rfs($value, margin);
+}
+
+@mixin margin-top($value) {
+  @include rfs($value, margin-top);
+}
+
+@mixin margin-right($value) {
+  @include rfs($value, margin-right);
+}
+
+@mixin margin-bottom($value) {
+  @include rfs($value, margin-bottom);
+}
+
+@mixin margin-left($value) {
+  @include rfs($value, margin-left);
+}
+
+// Mixins
+
+/* Media Queries */
+/* @include mq(breakpoint) {} */
+@mixin mq($breakpoint, $type: min) {
+  // If the breakpoint exists in the map.
+  @if map.has-key($breakpoints, $breakpoint) {
+    // Get the breakpoint value.
+    $breakpoint-value: map.get($breakpoints, $breakpoint);
+
+    // Determine query type.
+    @if $type == max {
+      $breakpoint-value: $breakpoint-value - rem(1px);
+    }
+    // Write the media query.
+    @media screen and (#{$type}-width: $breakpoint-value) {
+      @content;
+    }
+
+    // If the breakpoint doesn't exist in the map.
+  } @else {
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+/* @include mq-range($lower, $lower) {} */
+@mixin mq-range($lower, $upper) {
+  // If both the lower and upper breakpoints exist in the map.
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    // Get the lower and upper breakpoints.
+    $lower-breakpoint: map.get($breakpoints, $lower);
+    $upper-breakpoint: map.get($breakpoints, $upper);
+
+    // Write the media query.
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+
+    // If one or both of the breakpoints don't exist.
+  } @else {
+    // If lower breakpoint is invalid.
+    @if (map.has-key($breakpoints, $lower) == false) {
+      // Log a warning.
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+
+    // If upper breakpoint is invalid.
+    @if (map.has-key($breakpoints, $upper) == false) {
+      // Log a warning.
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
+
+$mqs: (
+  mobileMd,
+  mobileLg,
+  tablet,
+  laptop,
+  laptopLg,
+  desktop,
+  desktopHD,
+  desktopTV
+);
+
+@function nullish($val) {
+  @return $val == null or $val == 'null' or $val == 'undefined';
+}
+
+@mixin scope-custom-property(
+  $component-name,
+  $component-prop,
+  $responsively: false
+) {
+  @if $responsively and not nullish($responsively) {
+    @each $mq in $mqs {
+      & {
+        --#{$component-name}-#{$component-prop}-#{$mq}: initial;
+      }
+    }
+  } @else {
+    & {
+      --#{$component-name}-#{$component-prop}: initial;
+    }
+  }
+}
+
+@function mq-chain($component-name, $component-prop, $mq) {
+  $chain: null;
+  @for $i from 1 through list.length($mq) {
+    $bp: list.nth($mq, $i);
+    $var: string.unquote('--#{$component-name}-#{$component-prop}-#{$bp}');
+    @if $chain == null {
+      $chain: 'var(#{$var})';
+    } @else {
+      $chain: 'var(#{$var}, #{$chain})';
+    }
+  }
+  @return $chain;
+}
+
+@mixin responsive-custom-property(
+  $component-name,
+  $component-prop,
+  $token-subgroup
+) {
+  @include scope-custom-property($component-name, $component-prop, true);
+
+  $mobile-s-only: mq-chain($component-name, $component-prop, (mobileSm));
+  & {
+    #{$component-prop}: #{$mobile-s-only};
+  }
+
+  @each $mq,
+    $mqs
+      in (
+        mobileMd: (
+            mobileSm
+          ),
+        mobileLg: (
+            mobileSm,
+            mobileMd
+          ),
+        tablet: (
+            mobileSm,
+            mobileMd,
+            mobileLg
+          ),
+        laptop: (
+            mobileSm,
+            mobileMd,
+            mobileLg,
+            tablet
+          ),
+        laptopLg: (
+            mobileSm,
+            mobileMd,
+            mobileLg,
+            tablet,
+            laptop
+          ),
+        desktop: (
+            mobileSm,
+            mobileMd,
+            mobileLg,
+            tablet,
+            laptop,
+            laptopLg
+          ),
+        desktopHD: (
+            mobileSm,
+            mobileMd,
+            mobileLg,
+            tablet,
+            laptop,
+            laptopLg,
+            desktop
+          ),
+        desktopTV: (
+            mobileSm,
+            mobileMd,
+            mobileLg,
+            tablet,
+            laptop,
+            laptopLg,
+            desktopHD
+          )
+      )
+  {
+    @include mq(#{$mq}) {
+      & {
+        #{$component-prop}: #{mq-chain($component-name, $component-prop, $mqs)};
+      }
+    }
+  }
+}
+
+/// Returns the breakpoint value for a given variant.
+///
+/// @param {String} $width - which breakpoint width do you need.
+/// @return {Number} The spacing for the variant in px.
+
+@function breakpoint($width: auto) {
+  $fetched-value: map.get($breakpoints, $width);
+
+  @if meta.type-of($fetched-value) == number {
+    @return $fetched-value;
+  } @else {
+    @error 'Breakpoint variant `#{$width}` not found. Available variants: #{$breakpoints}';
+  }
+}
+
+/// Returns the spacing value for a given variant.
+///
+/// @param {String} $space - how much space do you need.
+/// @return {Number} The spacing for the variant in px.
+
+@function space($space: base) {
+  $fetched-value: map.get($spacing-data, $space);
+
+  @if meta.type-of($fetched-value) == number {
+    @return $fetched-value;
+  } @else {
+    @error 'Spacing variant `#{$space}` not found. Available variants: #{$spacing-data}';
+  }
+}
+
+/// Returns the value in rem for a given pixel value.
+/// @param {Number} $value - The pixel value to be converted.
+/// @return {Number} The converted value in rem.
+
+@function rem($value) {
+  $unit: math.unit($value);
+
+  @if $value == 0 {
+    @return 0;
+  } @else if $unit == 'rem' {
+    @return $value;
+  } @else if $unit == 'px' {
+    @return math.div($value, $font-size-base) * 1rem;
+  } @else if $unit == 'em' {
+    @return math.div($unit, 1em) * 1rem;
+  } @else {
+    @error 'Value must be in px, em, or rem.';
+  }
+}
+
+/// Returns the value in ems for a given pixel value. Note that this
+/// only works for elements that have had no font-size changes.
+/// @param {Number} $value - The pixel value to be converted.
+/// @return {Number} The converted value in ems.
+
+@function em($value) {
+  $unit: math.unit($value);
+
+  @if $value == 0 {
+    @return 0;
+  } @else if $unit == 'em' {
+    @return $value;
+  } @else if $unit == 'rem' {
+    @return math.div($value, 1rem) * 1em *
+      math.div($font-size-base, $default-browser-font-size);
+  } @else if $unit == 'px' {
+    @return math.div($value, $default-browser-font-size) * 1em;
+  } @else {
+    @error 'Value must be in px, rem, or em.';
+  }
+}
+
+/// Returns the font size for a given range.
+///
+/// @param {Number} $range - The font style.
+/// @return {Number} The font-size for the text-style.
+@function fontSize($range) {
+  $fetched-font-size: map.get($font-size-data, $range);
+  @if meta.type-of($fetched-font-size) != null {
+    @return $fetched-font-size;
+  } @else {
+    @error 'Font size range `#{$range}` not found. Available font sizes: #{$font-size-data}';
+  }
+}
+
+/// Returns the line height for a given range.
+///
+/// @param {Number} $range - The font style.
+/// @return {Number} The line-height for the text-style.
+@function lineHeight($range: normal) {
+  $fetched-line-height: map.get($line-height-data, $range);
+  @if meta.type-of($fetched-line-height) != null {
+    @return $fetched-line-height;
+  } @else {
+    @error 'Line height `#{$range}` not found. Available line heights: #{$line-height-data}';
+  }
+}
+
+/// Returns the font weight for a given weight definition.
+///
+/// @param {String} $weight - The font weight.
+/// @return {Number} The font-weight for the text-weight.
+@function fontWeight($weight: normal) {
+  $fetched-font-weight: map.get($font-weight-data, $weight);
+  @if meta.type-of($fetched-font-weight) != null {
+    @return $fetched-font-weight;
+  } @else {
+    @error 'Font weight `#{$weight}` not found. Available font weights: #{$font-weight-data}';
+  }
+}
+
+/// Returns the icon size for a given range.
+///
+/// @param {Number} $range - The icon style.
+/// @return {Number} The icon size for the svg.
+@function iconSize($range) {
+  $fetched-icon-size: map.get($icon-size-data, $range);
+  @if meta.type-of($fetched-icon-size) != null {
+    @return $fetched-icon-size;
+  } @else {
+    @error 'Icon size range `#{$range}` not found. Available sizes: #{$icon-size-data}';
+  }
+}
+
+@mixin appearance($light: true) {
+  @if $light {
+    & {
+      color-scheme: light;
+
+      // Light palettes
+      --text-color: var(--color-navy);
+      --text-subdued-color: var(--color-mid-gray);
+      --text-accent-color: var(--color-dark-pink);
+      --text-success-color: var(--color-dark-green);
+      --text-critical-color: var(--color-dark-red);
+      --text-warning-color: var(--color-orange);
+      --text-inverse-color: var(--color-near-white);
+
+      --app-background: var(--color-white);
+      --morph-fill: var(--color-near-white);
+
+      --avatar-decoration: var(--color-maroon);
+
+      --blockquote-background: var(--color-light-yellow);
+      --blockquote-text: var(--color-navy);
+      --blockquote: var(--color-dark-blue);
+
+      --divider-color: var(--color-light-gray);
+
+      --code-background: var(--color-light-gray);
+      --code-color: var(--color-dark-pink);
+      --pre-background: var(--color-dark-gray);
+      --pre-color: var(--color-aqua);
+
+      --link-color: var(--color-aqua);
+      --link-subdued-color: var(--color-light-gray);
+      --active-color: var(--color-lime);
+
+      --button-background: var(--color-aqua);
+      --button-border: var(--color-navy);
+
+      --select-background: var(--color-near-white);
+      --select-border: var(--color-light-gray);
+      --select-focus: var(--color-aqua);
+      --select-arrow: var(--color-navy);
+
+      --badge-background: var(--color-near-white);
+      --badge-border: var(--color-light-gray);
+
+      --table-background: var(--color-washed-blue);
+      --table-text: var(--color-navy);
+      --table-head: var(--color-white);
+      --table-head-background: var(--color-blue);
+      --table-stripe: var(--color-lightest-blue);
+      --table-border: var(--color-dark-blue);
+      --table-hover: var(--color-light-blue);
+
+      --drop-shadow: var(--color-light-gray);
+
+      --post-background: var(--color-washed-yellow);
+      --cover-background: var(--color-near-white);
+
+      --carousel-dots: var(--color-moon-gray);
+      --carousel-dot-active: var(--link-color);
+      --slide-background: var(--color-washed-green);
+
+      --critical-text-color: var(--color-rust);
+      --critical-fill-color: var(--color-lightest-pink);
+      --critical-border-color: var(--color-maroon);
+
+      --success-text-color: var(--color-dark-green);
+      --success-fill-color: var(--color-light-green);
+      --success-border-color: var(--color-olive);
+
+      --theme-red: var(--color-light-red);
+      --theme-red-bg: var(--color-washed-red);
+
+      --theme-orange: var(--color-orange);
+      --theme-orange-bg: var(--color-washed-yellow);
+
+      --theme-yellow: var(--color-yellow);
+      --theme-yellow-bg: var(--color-light-yellow);
+
+      --theme-green: var(--color-green);
+      --theme-green-bg: var(--color-washed-green);
+
+      --theme-teal: var(--color-teal);
+      --theme-teal-bg: var(--color-washed-blue);
+
+      --theme-blue: var(--color-dark-blue);
+      --theme-blue-bg: var(--color-lightest-blue);
+
+      --theme-indigo: var(--color-purple);
+      --theme-indigo-bg: var(--color-lightest-purple);
+
+      --theme-violet: var(--color-dark-pink);
+      --theme-violet-bg: var(--color-washed-pink);
+
+      --theme-black: var(--color-dark-gray);
+      --theme-black-bg: var(--color-moon-gray);
+
+      --theme-white: var(--color-moon-gray);
+      --theme-white-bg: var(--color-light-gray);
+
+      --radius: 0.625rem;
+      --background: var(--app-background);
+      --foreground: var(--text-color);
+
+      --card: var(--app-background);
+      --card-foreground: var(--text-color);
+
+      --popover: var(--app-background);
+      --popover-foreground: var(--text-color);
+
+      --primary: var(--text-color);
+      --primary-foreground: var(--app-background);
+
+      --secondary: oklch(0.968 0.007 247.896);
+      --secondary-foreground: var(--text-color);
+
+      --muted: var(--morph-fill);
+      --muted-foreground: oklch(0.554 0.046 257.417);
+
+      --accent: var(--app-background);
+      --accent-foreground: var(--text-color);
+
+      --destructive: oklch(0.577 0.245 27.325);
+
+      --border: oklch(0.929 0.013 255.508);
+      --input: oklch(0.929 0.013 255.508);
+      --ring: oklch(0.704 0.04 256.788);
+
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+
+      --sidebar: var(--morph-fill);
+      --sidebar-foreground: var(--text-color);
+      --sidebar-primary: oklch(0.208 0.042 265.755);
+      --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+      --sidebar-accent: var(--app-background);
+      --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
+      --sidebar-border: oklch(0.929 0.013 255.508);
+      --sidebar-ring: oklch(0.704 0.04 256.788);
+    }
+  } @else {
+    & {
+      color-scheme: dark;
+
+      // Dark palettes
+      --text-color: var(--color-near-white);
+      --text-subdued-color: var(--color-light-silver);
+      --text-accent-color: var(--color-hot-pink);
+      --text-success-color: var(--color-green);
+      --text-critical-color: var(--color-light-red);
+      --text-warning-color: var(--color-gold);
+      --text-inverse-color: var(--color-near-black);
+
+      --app-background: var(--color-near-black);
+      --morph-fill: var(--color-black);
+
+      --avatar-decoration: var(--color-lime);
+
+      --blockquote-background: var(--color-light-blue);
+      --blockquote-text: var(--color-navy);
+      --blockquote: var(--color-fuchsia);
+
+      --divider-color: var(--color-navy);
+
+      --link-color: var(--color-purple);
+      --link-subdued-color: var(--color-dark-gray);
+      --active-color: var(--color-dark-pink);
+
+      --button-background: var(--color-purple);
+      --button-border: var(--color-white);
+
+      --code-background: var(--color-dark-gray);
+      --code-color: var(--color-aqua);
+      --pre-background: var(--color-navy);
+      --pre-color: var(--color-orange);
+
+      --select-background: var(--color-black);
+      --select-border: var(--color-dark-gray);
+      --select-focus: var(--color-lime);
+      --select-arrow: var(--color-near-white);
+
+      --badge-background: var(--color-black);
+      --badge-border: var(--color-dark-gray);
+
+      --table-background: var(--color-washed-yellow);
+      --table-text: var(--color-navy);
+      --table-head: var(--color-navy);
+      --table-head-background: var(--color-gold);
+      --table-stripe: var(--color-light-yellow);
+      --table-border: var(--color-tangerine);
+      --table-hover: var(--color-yellow);
+
+      --drop-shadow: var(--color-dark-gray);
+
+      --post-background: var(--color-navy);
+      --cover-background: var(--color-black);
+
+      --carousel-dots: var(--color-dark-gray);
+      --carousel-dot-active: var(--link-color);
+      --slide-background: var(--color-dark-gray);
+
+      --critical-text-color: var(--color-washed-red);
+      --critical-fill-color: var(--color-maroon);
+      --critical-border-color: var(--color-light-red);
+
+      --success-text-color: var(--color-washed-green);
+      --success-fill-color: var(--color-forest);
+      --success-border-color: var(--color-olive);
+
+      --theme-red: var(--color-red);
+      --theme-red-bg: var(--color-maroon);
+
+      --theme-orange: var(--color-tangerine);
+      --theme-orange-bg: var(--color-rust);
+
+      --theme-yellow: var(--color-light-yellow);
+      --theme-yellow-bg: var(--color-brown);
+
+      --theme-green: var(--color-light-green);
+      --theme-green-bg: var(--color-dark-green);
+
+      --theme-teal: var(--color-teal);
+      --theme-teal-bg: var(--color-forest);
+
+      --theme-blue: var(--color-aqua);
+      --theme-blue-bg: var(--color-navy);
+
+      --theme-indigo: var(--color-light-purple);
+      --theme-indigo-bg: var(--color-navy);
+
+      --theme-violet: var(--color-pink);
+      --theme-violet-bg: var(--color-maroon);
+
+      --theme-black: var(--color-gray);
+      --theme-black-bg: var(--color-dark-gray);
+
+      --theme-white: var(--color-light-gray);
+      --theme-white-bg: var(--color-mid-gray);
+
+      --background: var(--app-background);
+      --foreground: var(--text-color);
+
+      --card: var(--app-background);
+      --card-foreground: var(--text-color);
+
+      --popover: var(--app-background);
+      --popover-foreground: var(--text-color);
+
+      --primary: var(--text-color);
+      --primary-foreground: var(--app-background);
+
+      --secondary: var(--text-color);
+      --secondary-foreground: oklch(0.984 0.003 247.858);
+      --muted: var(--morph-fill);
+      --muted-foreground: oklch(0.704 0.04 256.788);
+
+      --accent: var(--app-background);
+      --accent-foreground: var(--text-color);
+
+      --destructive: oklch(0.704 0.191 22.216);
+
+      --border: oklch(1 0 0 / 10%);
+      --input: oklch(1 0 0 / 15%);
+      --ring: oklch(0.551 0.027 264.364);
+
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+
+      --sidebar: var(--morph-fill);
+      --sidebar-foreground: oklch(0.984 0.003 247.858);
+      --sidebar-primary: oklch(0.488 0.243 264.376);
+      --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+      --sidebar-accent: var(--app-background);
+      --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+      --sidebar-border: oklch(1 0 0 / 10%);
+      --sidebar-ring: oklch(0.551 0.027 264.364);
+    }
+  }
+}
+
+@mixin H1-text-style($weight: bold) {
+  letter-spacing: 0.125em;
+  font-size: var(--headings-font-size-h1);
+  line-height: lineHeight(h1);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin H2-text-style($weight: bold) {
+  letter-spacing: 0.125em;
+  font-size: var(--headings-font-size-h2);
+  line-height: lineHeight(h2);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin H3-text-style($weight: bold) {
+  letter-spacing: 0.125em;
+  font-size: var(--headings-font-size-h3);
+  line-height: lineHeight(h3);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin H4-text-style($weight: bold) {
+  letter-spacing: 0.1em;
+  font-size: var(--headings-font-size-h4);
+  line-height: lineHeight(h4);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin H5-text-style($weight: bold) {
+  letter-spacing: 0.1em;
+  font-size: var(--headings-font-size-h5);
+  line-height: lineHeight(h5);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin H6-text-style($weight: bold) {
+  letter-spacing: 0.1em;
+  font-size: var(--headings-font-size-h6);
+  line-height: lineHeight(h6);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin subtitle2-text-style($weight: normal) {
+  font-size: var(--font-size-subtitle2);
+  line-height: lineHeight(subtitle2);
+  font-weight: fontWeight($weight);
+}
+
+@mixin subtitle1-text-style($weight: normal) {
+  font-size: var(--font-size-subtitle1);
+  line-height: lineHeight(subtitle1);
+  font-weight: fontWeight($weight);
+}
+
+@mixin body2-text-style($weight: normal) {
+  font-size: var(--font-size-body2);
+  margin-top: space(base);
+  margin-bottom: space(base);
+  line-height: lineHeight(body2);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+  letter-spacing: 0px;
+}
+
+@mixin body1-text-style($weight: normal) {
+  font-size: var(--font-size-body1);
+  margin-top: space(base);
+  margin-bottom: space(base);
+  letter-spacing: 0px;
+  line-height: lineHeight(body1);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin body-text-style($weight: normal) {
+  font-size: var(--body-font-size);
+  margin-top: space(base);
+  margin-bottom: space(base);
+  letter-spacing: 0px;
+  line-height: lineHeight(body);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin lead-text-style($weight: normal) {
+  font-size: var(--font-size-lead);
+  line-height: lineHeight(list);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin fine-text-style($weight: normal) {
+  font-size: var(--font-size-fine);
+  line-height: lineHeight(micro);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin micro-text-style($weight: normal) {
+  font-size: var(--font-size-micro);
+  line-height: lineHeight(micro);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin caption-text-style($weight: normal) {
+  font-size: var(--font-size-caption);
+  line-height: lineHeight(caption);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin list-text-style($weight: normal) {
+  font-size: var(--font-size-base);
+  line-height: lineHeight(list);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+}
+
+@mixin overline-text-style($weight: normal) {
+  font-size: var(--font-size-overline);
+  line-height: lineHeight(overline);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-inter);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@mixin button-text-style($weight: normal) {
+  font-size: var(--font-size-button);
+  line-height: lineHeight(button);
+  font-weight: fontWeight($weight);
+  font-family: var(--font-permanent-marker);
+}
+
+@mixin link-text-style($weight: inherit) {
+  appearance: none;
+  background: none;
+  display: inline-flex;
+  position: relative;
+  color: inherit;
+  text-align: inherit;
+  border: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: lineHeight(link);
+  font-weight: fontWeight($weight);
+  font-family: inherit;
+
+  cursor: pointer;
+  z-index: 0;
+
+  @media print {
+    text-decoration-color: var(--color-border-tertiary);
+  }
+}
+
+@mixin color-schemes {
+  > .themeGreen {
+    --color: var(--theme-green);
+    fill: var(--color);
+  }
+
+  > .themeViolet {
+    --color: var(--theme-violet);
+    fill: var(--color);
+  }
+
+  > .themeBlue {
+    --color: var(--theme-blue);
+    fill: var(--color);
+  }
+
+  > .themeRed {
+    --color: var(--theme-red);
+    fill: var(--color);
+  }
+
+  > .themeOrange {
+    --color: var(--theme-orange);
+    fill: var(--color);
+  }
+
+  > .themeYellow {
+    --color: var(--theme-yellow);
+    fill: var(--color);
+  }
+
+  > .themeIndigo {
+    --color: var(--theme-indigo);
+    fill: var(--color);
+  }
+
+  > .themeTeal {
+    --color: var(--theme-teal);
+    fill: var(--color);
+  }
+
+  > .themeBlack {
+    --color: var(--theme-black);
+    fill: var(--color);
+  }
+
+  > .themeWhite {
+    --color: var(--theme-white);
+    fill: var(--color);
+  }
+}
+
+// ==========
+// 🤖 Variables
+// ==========
+
+// 🤖 Variables
+
+// Alpha & Opacity
+$transparent: transparent;
+
+// Colors
+
+/* Red palette */
+$color-maroon: #85144b;
+$color-dark-red: #e7040f;
+$color-red: #ff4136;
+$color-light-red: #ff725c;
+$color-washed-red: #ffdfdf;
+
+/* Orange palette */
+$color-gold: #ffb700;
+$color-tangerine: #ff851b;
+$color-orange: #ff6300;
+$color-rust: #612500;
+
+/* Yellow palette */
+$color-brown: #614500;
+$color-yellow: #ffd700;
+$color-light-yellow: #fbf1a9;
+$color-washed-yellow: #fffceb;
+
+/* Green palette */
+$color-forest: #013320;
+$color-dark-green: #137752;
+$color-olive: #3d9970;
+$color-lime: #01ff70;
+$color-green: #2ecc40;
+$color-light-green: #9eebcf;
+$color-washed-green: #e8fdf5;
+
+/* Blue palette */
+$color-navy: #001b44;
+$color-dark-blue: #00449e;
+$color-blue: #0074d9;
+$color-teal: #39cccc;
+$color-aqua: #7fdbff;
+$color-light-blue: #96ccff;
+$color-lightest-blue: #cdecff;
+$color-washed-blue: #f6fffe;
+
+/* Indigo palette */
+$color-purple: #5e2ca5;
+$color-light-purple: #a463f2;
+$color-lightest-purple: #ccbaff;
+$color-washed-purple: #dedfff;
+
+/* Violet palette */
+$color-dark-pink: #d5008f;
+$color-fuchsia: #f012be;
+$color-hot-pink: #ff41b4;
+$color-pink: #ff80cc;
+$color-light-pink: #ffa3d7;
+$color-lightest-pink: #ffcbdc;
+$color-washed-pink: #ffdced;
+
+/* Gray palette */
+$color-black: #000000;
+$color-near-black: #111111;
+$color-dark-gray: #333333;
+$color-mid-gray: #555555;
+$color-gray: #777777;
+$color-silver: #999999;
+$color-light-silver: #aaaaaa;
+$color-moon-gray: #cccccc;
+$color-light-gray: #eeeeee;
+$color-near-white: #f4f4f4;
+$color-white: #ffffff;
+
+// Typography
+
+/* Fonts */
+$sans-serif:
+  var(--font-inter),
+  /* Adobe Typekit */ -apple-system,
+  blinkmacsystemfont,
+  /* MacOS and iOS */ 'avenir next',
+  avenir,
+  /* MacOS and iOS */ 'Segoe UI',
+  /* Windows */ 'lucida grande',
+  /* Older MacOS */ 'helvetica neue',
+  helvetica,
+  /* Older MacOS */ 'Fira Sans',
+  /* Firefox OS */ roboto,
+  noto,
+  /* Google stuff */ 'Droid Sans',
+  /* Old Google stuff */ cantarell,
+  oxygen,
+  ubuntu,
+  /* Linux stuff */ 'franklin gothic medium',
+  'century gothic',
+  /* Windows stuff */ 'Liberation Sans',
+  /* Linux */ sans-serif; /* Everything else */
+
+$font-family: $sans-serif;
+$text-color: $color-navy;
+
+/* Links */
+$active-color: $color-lime;
+$active-color-hover: color.adjust($active-color, $lightness: 5%);
+
+/* Buttons */
+$button-bg: $color-aqua;
+$button-border: $text-color;
+
+/* Font Sizing */
+$default-browser-font-size: 16px;
+$font-size-base: $default-browser-font-size;
+
+$font-size-data: (
+  h1: rem($font-size-base * 4),
+  h2: rem($font-size-base * 3),
+  h3: rem($font-size-base * 2.5),
+  h4: rem($font-size-base * 2),
+  h5: rem($font-size-base * 1.75),
+  h6: rem($font-size-base * 1.5),
+  subtitle2: rem($font-size-base * 1),
+  subtitle1: rem($font-size-base * 1.125),
+  body2: rem($font-size-base * 0.875),
+  body1: rem($font-size-base),
+  caption: rem($font-size-base * 0.875),
+  button: rem($font-size-base * 1.2),
+  overline: rem($font-size-base * 0.875),
+  lead: rem($font-size-base * 1.6),
+  body: rem($font-size-base),
+  fine: rem($font-size-base * 0.725),
+  micro: rem($font-size-base * 0.65),
+  link: rem($font-size-base),
+  list: rem($font-size-base)
+);
+
+$headings-font-size-h1: fontSize(h1);
+$headings-font-size-h2: fontSize(h2);
+$headings-font-size-h3: fontSize(h3);
+$headings-font-size-h4: fontSize(h4);
+$headings-font-size-h5: fontSize(h5);
+$headings-font-size-h6: fontSize(h6);
+$lead-font-size: fontSize(lead);
+
+$font-size-subtitle2: fontSize(subtitle2);
+$font-size-subtitle1: fontSize(subtitle1);
+$font-size-body2: fontSize(body2);
+$font-size-body1: fontSize(body1);
+$font-size-caption: fontSize(caption);
+$font-size-button: fontSize(button);
+$font-size-overline: fontSize(overline);
+
+$line-height-data: (
+  h1: 1,
+  h2: 1,
+  h3: 1,
+  h4: 1,
+  h5: 1,
+  h6: 1,
+  subtitle2: 1.2,
+  subtitle1: 1.4,
+  body2: 1.6,
+  body1: 1.8,
+  body: 1.8,
+  caption: 1.5,
+  button: 1.1,
+  overline: 1.5,
+  lead: 1.8,
+  link: 1.5,
+  list: 1.6
+);
+
+$font-weight-data: (
+  bold: 700,
+  medium: 500,
+  normal: 400
+);
+
+$icon-size-data: (
+  small: rem($font-size-base * 0.825),
+  medium: rem($font-size-base * 1.25),
+  large: rem($font-size-base * 2),
+  xlarge: rem($font-size-base * 2.625)
+);
+
+$icon-size-small: iconSize(small);
+$icon-size-medium: iconSize(medium);
+$icon-size-large: iconSize(large);
+$icon-size-xlarge: iconSize(xlarge);
+
+// Spacing
+$point-unit: 8px;
+
+$spacing-data: (
+  none: 0,
+  hairline: rem($point-unit * 0.125),
+  // 1px
+  super-tight: rem($point-unit * 0.25),
+  // 2px
+  extra-tight: rem($point-unit * 0.5),
+  // 4px
+  tight: rem($point-unit),
+  // 8px
+  bit-tight: rem($point-unit * 1.5),
+  // 12px
+  base: rem($point-unit * 2),
+  // 16px
+  bit-loose: rem($point-unit * 3),
+  // 24px
+  loose: rem($point-unit * 4),
+  // 32px
+  extra-loose: rem($point-unit * 6),
+  // 48px
+  super-loose: rem($point-unit * 8),
+  // 64px
+  jumbo: rem($point-unit * 16) // 128px
+);
+
+$breakpoints: (
+  none: 0,
+  auto: auto,
+  mobileSm: rem($point-unit * 40),
+  // 320px
+  mobileMd: rem($point-unit * 46.875),
+  // 375px
+  mobileLg: rem($point-unit * 53.125),
+  // 425px
+  tablet: rem($point-unit * 96),
+  // 768px
+  laptop: rem($point-unit * 128),
+  // 1024px
+  laptopLg: rem($point-unit * 180),
+  // 1440px
+  desktop: rem($point-unit * 240),
+  // 1920px
+  desktopHD: rem($point-unit * 320),
+  // 2560px
+  desktopTV: rem($point-unit * 320)
+);
+
+$max-width: breakpoint(laptopLg);
+
+// Depth
+$z-max: 2147483647;
