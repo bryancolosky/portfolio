@@ -88,7 +88,17 @@ export const typeSettings = {
     </Text>
   ),
   pre: ({ children, id }: TypographyProps) => (
-    <Text variant="code" element="pre" id={id}>
+    <Text variant="pre" element="pre" id={id}>
+      {children}
+    </Text>
+  ),
+  code: ({ children, id }: TypographyProps) => (
+    <Text variant="code" element="code" id={id}>
+      {children}
+    </Text>
+  ),
+  kbd: ({ children, id }: TypographyProps) => (
+    <Text variant="keyboard" element="kbd" id={id}>
       {children}
     </Text>
   ),
@@ -125,7 +135,7 @@ export const Text = ({
   const Component = element || (visuallyHidden ? 'span' : 'p');
 
   const className = classNames(
-    styles.root,
+    styles.text,
     variant && styles[variationName('variant', variant)],
     fontWeight && styles[variationName('fontWeight', fontWeight)],
     (alignment || truncate) && styles.block,

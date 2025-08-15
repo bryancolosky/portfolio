@@ -1,5 +1,37 @@
 @use '@/ui/styles/app.scss';
 
+.text,
+h1.text,
+h2.text,
+h3.text,
+h4.text,
+h5.text,
+h6.text,
+p.text,
+span.text,
+small.text,
+em.text,
+strong.text,
+abbr.text,
+mark.text,
+b.text,
+i.text,
+s.text,
+label.text,
+legend.text,
+del.text,
+ins.text,
+cite.text,
+address.text,
+time.text,
+sub.text,
+sup.text,
+ul.text,
+ol.text,
+li.text {
+  color: var(--text-color);
+}
+
 h1.variantHeadline-1 {
   @include app.H1-text-style;
 }
@@ -24,48 +56,78 @@ h6.variantHeadline-6 {
   @include app.H6-text-style;
 }
 
-.variantBody {
+.variantBody,
+p.variantBody,
+span.variantBody,
+small.variantBody,
+em.variantBody,
+label.variantBody {
   @include app.body-text-style;
 }
 
-.variantLead {
+.variantLead,
+p.variantLead,
+span.variantLead,
+small.variantLead,
+em.variantLead,
+label.variantLead {
   @include app.lead-text-style;
 }
 
-.variantCaption {
+.variantCaption,
+p.variantCaption,
+span.variantCaption,
+small.variantCaption,
+em.variantCaption,
+label.variantCaption {
   @include app.caption-text-style;
 }
 
-.variantFine {
+.variantFine,
+p.variantFine,
+span.variantFine,
+small.variantFine,
+em.variantFine,
+label.variantFine {
   @include app.fine-text-style;
 }
 
-.variantMicro {
+.variantMicro,
+p.variantMicro,
+span.variantMicro,
+small.variantMicro,
+em.variantMicro,
+label.variantMicro {
   @include app.micro-text-style;
 }
 
-.fontWeightBold {
-  font-weight: 700;
-}
-
-.variantCode {
+.variantPre,
+pre.variantPre,
+.variantPre:not(.prismjs),
+pre.variantPre:not(.prismjs) {
   position: relative;
   margin: app.space(extra-loose) 0;
+  background: var(--pre-background);
   background-color: var(--pre-background);
   border-radius: 0.25rem;
+
   padding: {
     right: app.space(bit-tight);
     left: app.space(bit-tight);
   }
+
   padding: {
     top: app.space(base);
     bottom: app.space(base);
   }
-  > code {
+
+  >code {
     padding: app.space(none);
     background-color: transparent;
     color: var(--pre-color);
+    white-space: pre-wrap;
   }
+
   word-wrap: break-word;
   white-space: pre-wrap;
 
@@ -74,6 +136,7 @@ h6.variantHeadline-6 {
     padding-left: app.space(bit-tight);
     transform: translate(0%, -100%);
     @include app.H4-text-style;
+
     & {
       line-height: 1;
       position: absolute;
@@ -84,6 +147,32 @@ h6.variantHeadline-6 {
       align-items: center;
     }
   }
+}
+
+.variantCode,
+code.variantCode,
+.variantCode:not(.prismjs),
+code.variantCode:not(.prismjs) {
+  font-size: inherit;
+  background-color: var(--code-background);
+  color: var(--code-color);
+  border-radius: 0.25rem;
+  line-height: 1.2;
+
+
+  padding: {
+    right: app.space(tight);
+    left: app.space(tight);
+  }
+
+  padding: {
+    top: app.space(extra-tight);
+    bottom: app.space(extra-tight);
+  }
+}
+
+.fontWeightBold {
+  font-weight: 700;
 }
 
 .subdued {
@@ -129,6 +218,7 @@ blockquote.quote {
     padding-right: app.space(tight);
     transform: translateX(-100%);
     @include app.H2-text-style;
+
     & {
       line-height: 1;
       position: absolute;
@@ -139,7 +229,8 @@ blockquote.quote {
       align-items: center;
     }
   }
-  > p {
+
+  >p {
     margin: app.space(none);
     @include app.lead-text-style;
   }
@@ -159,9 +250,11 @@ ol.list {
     top: app.space(tight);
     bottom: app.space(tight);
   }
+
   padding: {
     right: app.space(bit-loose);
     left: app.space(bit-loose);
   }
+
   @include app.list-text-style;
 }

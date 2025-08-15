@@ -16,11 +16,11 @@ export type PageType = React.ReactElement;
 
 export interface PageProps {
   loading?: boolean;
-  animation?: boolean;
+  animate?: boolean;
   children?: React.ReactNode | React.ReactElement;
 }
 
-export const Page = ({ loading, children, animation }: PageProps): PageType => {
+export const Page = ({ loading, children, animate }: PageProps): PageType => {
   if (loading)
     return (
       <FullFrame>
@@ -29,7 +29,7 @@ export const Page = ({ loading, children, animation }: PageProps): PageType => {
     );
 
   return (
-    <Main animation={animation === undefined ? true : animation}>
+    <Main animate={animate === undefined ? true : animate}>
       {children}
     </Main>
   );

@@ -76,16 +76,17 @@
 
   --font-family: #{app.$font-family};
   --font-size-base: #{app.$font-size-base};
+  @include app.rfs(app.fontSize(base), --font-size-base);
   @include app.rfs(app.fontSize(h1), --headings-font-size-h1);
   @include app.rfs(app.fontSize(h2), --headings-font-size-h2);
   @include app.rfs(app.fontSize(h3), --headings-font-size-h3);
   @include app.rfs(app.fontSize(h4), --headings-font-size-h4);
   @include app.rfs(app.fontSize(h5), --headings-font-size-h5);
   @include app.rfs(app.fontSize(h6), --headings-font-size-h6);
-  @include app.rfs(app.fontSize(body1), --body1-font-size);
-  @include app.rfs(app.fontSize(body2), --body2-font-size);
-  @include app.rfs(app.fontSize(subtitle1), --subtitle1-font-size);
-  @include app.rfs(app.fontSize(subtitle2), --subtitle2-font-size);
+  @include app.rfs(app.fontSize(body1), --font-size-body1);
+  @include app.rfs(app.fontSize(body2), --font-size-body2);
+  @include app.rfs(app.fontSize(subtitle1), --font-size-subtitle1);
+  @include app.rfs(app.fontSize(subtitle2), --font-size-subtitle2);
   @include app.rfs(app.fontSize(overline), --font-size-overline);
   @include app.rfs(app.fontSize(caption), --font-size-caption);
   @include app.rfs(app.fontSize(lead), --font-size-lead);
@@ -238,6 +239,7 @@ button {
   & {
     cursor: pointer;
   }
+
   &:focus {
     outline: 0;
   }
@@ -272,7 +274,8 @@ blockquote {
     display: flex;
     align-items: center;
   }
-  > p {
+
+  >p {
     @include app.lead-text-style;
   }
 }
@@ -282,10 +285,14 @@ code {
   background-color: var(--code-background);
   color: var(--code-color);
   border-radius: 0.25rem;
+  line-height: 1.2;
+
+
   padding: {
     right: app.space(tight);
     left: app.space(tight);
   }
+
   padding: {
     top: app.space(extra-tight);
     bottom: app.space(extra-tight);
@@ -298,19 +305,24 @@ pre {
   background-color: var(--pre-background);
   color: var(--pre-color);
   border-radius: 0.25rem;
+
   padding: {
     right: app.space(bit-tight);
     left: app.space(bit-tight);
   }
+
   padding: {
     top: app.space(base);
     bottom: app.space(base);
   }
-  > code {
+
+  >code {
     padding: app.space(none);
     background-color: transparent;
     color: var(--pre-color);
+    white-space: pre-wrap;
   }
+
   word-wrap: break-word;
   white-space: pre-wrap;
 
@@ -333,9 +345,16 @@ img {
   width: auto;
 }
 
+kbd {
+  font-size: var(--font-size-base);
+  color: var(--color-gray);
+  background-color: var(--color-light-silver);
+}
+
 hr {
   border: var(--divider-color) solid 0.25rem;
   border-radius: 0.125rem;
+
   margin: {
     top: app.space(extra-loose);
     bottom: app.space(extra-loose);
@@ -375,27 +394,30 @@ table.table {
   max-width: 100%;
   margin-bottom: 1rem;
 
-  > thead,
-  > tbody,
-  > tfoot {
-    > tr {
-      > th,
-      > td {
+  >thead,
+  >tbody,
+  >tfoot {
+    >tr {
+
+      >th,
+      >td {
         padding: 1.25rem;
         line-height: 1.1;
         vertical-align: top;
         border-top: 1px solid var(--table-border);
         text-align: left;
       }
+
       &:last-child {
         border-radius: 0 0.5rem;
 
-        > td {
+        >td {
           &:first-of-type {
             border-bottom-left-radius: 0.5rem;
           }
         }
-        > td {
+
+        >td {
           &:last-of-type {
             border-bottom-right-radius: 0.5rem;
           }
@@ -403,7 +425,8 @@ table.table {
       }
     }
   }
-  > thead > tr > th {
+
+  >thead>tr>th {
     vertical-align: bottom;
     color: var(--table-head);
     @include app.H6-text-style;
@@ -418,18 +441,20 @@ table.table {
       border-radius: 0 0.5rem 0 0;
     }
   }
-  > caption + thead,
-  > colgroup + thead,
-  > thead:first-child {
-    > tr:first-child {
-      > th,
-      > td {
+
+  >caption+thead,
+  >colgroup+thead,
+  >thead:first-child {
+    >tr:first-child {
+
+      >th,
+      >td {
         border-top: 0;
       }
     }
   }
 
-  > tbody + tbody {
+  >tbody+tbody {
     border-top: 2px solid var(--table-border);
   }
 
@@ -439,12 +464,14 @@ table.table {
 }
 
 .table-condensed {
-  > thead,
-  > tbody,
-  > tfoot {
-    > tr {
-      > th,
-      > td {
+
+  >thead,
+  >tbody,
+  >tfoot {
+    >tr {
+
+      >th,
+      >td {
         padding: 0.75rem;
       }
     }
@@ -457,33 +484,37 @@ table.table {
   border-spacing: 0;
   box-shadow: 0 0 0 0.5rem var(--table-border);
 
-  > thead,
-  > tbody,
-  > tfoot {
-    > tr {
-      > th,
-      > td {
+  >thead,
+  >tbody,
+  >tfoot {
+    >tr {
+
+      >th,
+      >td {
         border-collapse: collapse;
         border-spacing: -1px;
         border-left: 1px solid var(--table-border);
       }
     }
   }
-  > thead > tr {
-    > th,
-    > td {
+
+  >thead>tr {
+
+    >th,
+    >td {
       border-bottom-width: 2px;
     }
 
     &:last-child {
       border-radius: 0 0.5rem;
 
-      > td {
+      >td {
         &:first-of-type {
           border-bottom-left-radius: 0.5rem;
         }
       }
-      > td {
+
+      >td {
         &:last-of-type {
           border-bottom-right-radius: 0.5rem;
         }
@@ -493,16 +524,17 @@ table.table {
 }
 
 .table-striped {
-  > tbody > tr {
+  >tbody>tr {
     &:last-child {
       border-radius: 0 0.5rem;
 
-      > td {
+      >td {
         &:first-of-type {
           border-bottom-left-radius: 0.5rem;
         }
       }
-      > td {
+
+      >td {
         &:last-of-type {
           border-bottom-right-radius: 0.5rem;
         }
@@ -516,7 +548,7 @@ table.table {
 }
 
 .table-hover {
-  > tbody > tr:hover {
+  >tbody>tr:hover {
     background-color: var(--table-hover);
   }
 }
@@ -531,44 +563,48 @@ table.table {
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 
-    > .table {
+    >.table {
       margin-bottom: 0;
 
-      > thead,
-      > tbody,
-      > tfoot {
-        > tr {
-          > th,
-          > td {
+      >thead,
+      >tbody,
+      >tfoot {
+        >tr {
+
+          >th,
+          >td {
             white-space: nowrap;
           }
         }
       }
     }
 
-    > .table-bordered {
+    >.table-bordered {
       border: 0;
 
-      > thead,
-      > tbody,
-      > tfoot {
-        > tr {
-          > th:first-child,
-          > td:first-child {
+      >thead,
+      >tbody,
+      >tfoot {
+        >tr {
+
+          >th:first-child,
+          >td:first-child {
             border-left: 0;
           }
-          > th:last-child,
-          > td:last-child {
+
+          >th:last-child,
+          >td:last-child {
             border-right: 0;
           }
         }
       }
 
-      > tbody,
-      > tfoot {
-        > tr:last-child {
-          > th,
-          > td {
+      >tbody,
+      >tfoot {
+        >tr:last-child {
+
+          >th,
+          >td {
             border-bottom: 0;
           }
         }

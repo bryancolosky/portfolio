@@ -190,6 +190,7 @@ const preview: Preview = {
         h5: typeSettings.h5,
         h6: typeSettings.h6,
         pre: typeSettings.pre,
+        code: typeSettings.code,
         p: typeSettings.p
       }
     },
