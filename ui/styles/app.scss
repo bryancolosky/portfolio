@@ -978,166 +978,220 @@ $mqs: (
 
 @mixin H1-text-style($weight: bold) {
   @include rfs(fontSize(h1), --headings-font-size-h1);
-  font-size: var(--headings-font-size-h1);
-  letter-spacing: 0.125em;
-  line-height: lineHeight(h1);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--headings-font-size-h1);
+    letter-spacing: 0.125em;
+    line-height: lineHeight(h1);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin H2-text-style($weight: bold) {
   @include rfs(fontSize(h2), --headings-font-size-h2);
-  font-size: var(--headings-font-size-h2);
-  letter-spacing: 0.125em;
-  line-height: lineHeight(h2);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--headings-font-size-h2);
+    letter-spacing: 0.125em;
+    line-height: lineHeight(h2);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin H3-text-style($weight: bold) {
   @include rfs(fontSize(h3), --headings-font-size-h3);
-  font-size: var(--headings-font-size-h3);
-  letter-spacing: 0.125em;
-  line-height: lineHeight(h3);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--headings-font-size-h3);
+    letter-spacing: 0.125em;
+    line-height: lineHeight(h3);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin H4-text-style($weight: bold) {
   @include rfs(fontSize(h4), --headings-font-size-h4);
-  font-size: var(--headings-font-size-h4);
-  letter-spacing: 0.1em;
-  line-height: lineHeight(h4);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--headings-font-size-h4);
+    letter-spacing: 0.1em;
+    line-height: lineHeight(h4);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin H5-text-style($weight: bold) {
   @include rfs(fontSize(h5), --headings-font-size-h5);
-  font-size: var(--headings-font-size-h5);
-  letter-spacing: 0.1em;
-  line-height: lineHeight(h5);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--headings-font-size-h5);
+    letter-spacing: 0.1em;
+    line-height: lineHeight(h5);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin H6-text-style($weight: bold) {
   @include rfs(fontSize(h6), --headings-font-size-h6);
-  font-size: var(--headings-font-size-h6);
-  letter-spacing: 0.1em;
-  line-height: lineHeight(h6);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--headings-font-size-h6);
+    letter-spacing: 0.1em;
+    line-height: lineHeight(h6);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin subtitle2-text-style($weight: normal) {
   @include rfs(fontSize(subtitle2), --font-size-subtitle2);
-  font-size: var(--font-size-subtitle2);
-  line-height: lineHeight(subtitle2);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-subtitle2);
+    line-height: lineHeight(subtitle2);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 
 }
 
 @mixin subtitle1-text-style($weight: normal) {
   @include rfs(fontSize(subtitle1), --font-size-subtitle1);
-  font-size: var(--font-size-subtitle1);
-  line-height: lineHeight(subtitle1);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-subtitle1);
+    line-height: lineHeight(subtitle1);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 
 }
 
 @mixin body2-text-style($weight: normal) {
   @include rfs(fontSize(body2), --font-size-body2);
-  font-size: var(--font-size-body2);
-  margin-top: space(base);
-  margin-bottom: space(base);
-  line-height: lineHeight(body2);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
-  letter-spacing: 0px;
+
+  & {
+    font-size: var(--font-size-body2);
+    margin-top: space(base);
+    margin-bottom: space(base);
+    line-height: lineHeight(body2);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+    letter-spacing: 0px;
+  }
 }
 
 @mixin body1-text-style($weight: normal) {
   @include rfs(fontSize(body1), --font-size-body1);
-  font-size: var(--font-size-body1);
-  margin-top: space(base);
-  margin-bottom: space(base);
-  line-height: lineHeight(body1);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
-  letter-spacing: 0px;
+
+  & {
+    font-size: var(--font-size-body1);
+    margin-top: space(base);
+    margin-bottom: space(base);
+    line-height: lineHeight(body1);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+    letter-spacing: 0px;
+  }
 
 }
 
 @mixin body-text-style($weight: normal) {
   @include rfs(fontSize(body), --font-size-body);
-  font-size: var(--font-size-body);
-  margin-top: space(base);
-  margin-bottom: space(base);
-  line-height: lineHeight(body);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
-  letter-spacing: 0px;
+
+  & {
+    font-size: var(--font-size-body);
+    margin-top: space(base);
+    margin-bottom: space(base);
+    line-height: lineHeight(body);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+    letter-spacing: 0px;
+  }
 }
 
 @mixin lead-text-style($weight: normal) {
   @include rfs(fontSize(lead), --font-size-lead);
-  font-size: var(--font-size-lead);
-  line-height: lineHeight(list);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-lead);
+    line-height: lineHeight(list);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 }
 
 @mixin fine-text-style($weight: normal) {
   @include rfs(fontSize(fine), --font-size-fine);
-  font-size: var(--font-size-fine);
-  line-height: lineHeight(micro);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-fine);
+    line-height: lineHeight(micro);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 }
 
 @mixin micro-text-style($weight: normal) {
   @include rfs(fontSize(micro), --font-size-micro);
-  font-size: var(--font-size-micro);
-  line-height: lineHeight(micro);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-micro);
+    line-height: lineHeight(micro);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 }
 
 @mixin caption-text-style($weight: normal) {
   @include rfs(fontSize(caption), --font-size-caption);
-  font-size: var(--font-size-caption);
-  line-height: lineHeight(caption);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-caption);
+    line-height: lineHeight(caption);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 }
 
 @mixin list-text-style($weight: normal) {
   @include rfs(fontSize(base), --font-size-base);
-  font-size: var(--font-size-base);
-  line-height: lineHeight(list);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
+
+  & {
+    font-size: var(--font-size-base);
+    line-height: lineHeight(list);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+  }
 }
 
 @mixin overline-text-style($weight: normal) {
   @include rfs(fontSize(overline), --font-size-overline);
-  font-size: var(--font-size-overline);
-  line-height: lineHeight(overline);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-inter);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+
+  & {
+    font-size: var(--font-size-overline);
+    line-height: lineHeight(overline);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-inter);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 }
 
 @mixin button-text-style($weight: normal) {
   @include rfs(fontSize(button), --font-size-button);
-  font-size: var(--font-size-button);
-  line-height: lineHeight(button);
-  font-weight: fontWeight($weight);
-  font-family: var(--font-permanent-marker);
+
+  & {
+    font-size: var(--font-size-button);
+    line-height: lineHeight(button);
+    font-weight: fontWeight($weight);
+    font-family: var(--font-permanent-marker);
+  }
 }
 
 @mixin link-text-style($weight: inherit) {
