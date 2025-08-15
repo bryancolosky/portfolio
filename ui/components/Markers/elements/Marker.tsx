@@ -87,10 +87,10 @@ type AdvancedMarkerEventProps = {
 
 export type AdvancedMarkerProps = PropsWithChildren<
   Omit<google.maps.marker.AdvancedMarkerElementOptions, 'gmpDraggable'> &
-    AdvancedMarkerEventProps & {
-      className?: string;
-      draggable?: boolean;
-    }
+  AdvancedMarkerEventProps & {
+    className?: string;
+    draggable?: boolean;
+  }
 >;
 
 export type AdvancedMarkerRef = google.maps.marker.AdvancedMarkerElement | null;
@@ -183,7 +183,7 @@ export const AdvancedMarker = forwardRef(
     const { children } = props;
     const [marker, contentContainer] = useAdvancedMarker(props);
 
-    useImperativeHandle(ref, () => (marker ? marker : undefined), [marker]);
+    useImperativeHandle(ref, () => (marker! && marker), [marker]);
 
     if (!marker) {
       return null;
@@ -286,7 +286,7 @@ function useMarker(props: MarkerProps) {
 export const Marker = forwardRef((props: MarkerProps, ref: MarkerRef) => {
   const marker = useMarker(props);
 
-  useImperativeHandle(ref, () => marker, [marker]);
+  useImperativeHandle(ref, () => marker!, [marker]);
 
   return <Fragment />;
 });
