@@ -1,28 +1,31 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { Page, pages } from '@/lib/pages';
 import type { Content, ResponseError } from 'interfaces/index';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export type NotFoundResponse = ResponseError;
+interface RouteContext {
+  params: Promise<{ id: string }>;
+}
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-): Promise<NextResponse<Content | ResponseError>> {
-  const { id } = await params;
-  const page = pages.find((p) => p.id === id);
+  request: NextRequest,
+  context: RouteContext
+): Promise<NextResponse> {
+  try {
+    const { id } = await context.params;
+    const page = pages.find((p) => p.id === id);
 
-  if (page) {
-    return NextResponse.json(page);
-  } else {
-    return NextResponse.json(
-      {
-        name: `Not found ${id}`,
-        status: 404,
-        message: `Page with id: ${id} not found.`
-      },
-      { status: 404, headers: { Allow: 'GET' } }
-    );
+    if (page) { return NextResponse.json(page); } else {
+      return NextResponse.json(
+        {
+          name: `Not found ${id}`,
+          status: 404,
+          message: `Page with id: ${id} not found.`
+        },
+        { status: 404, headers: { Allow: 'GET' } }
+      );
+    }
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
