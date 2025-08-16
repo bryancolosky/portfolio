@@ -124,58 +124,83 @@ html {
 }
 
 body {
-  --body-font-family: var(--font-inter);
-  --body-color: var(--text-color);
-  --body-background: var(--app-background);
-  width: 100%;
-  color: var(--body-color);
-  background: var(--body-background);
-  font-family: var(--body-font-family);
-  margin: 0;
   @include app.rfs(app.$font-size-base, --body-font-size);
 
   @extend html;
+
+  & {
+    --body-font-family: var(--font-inter);
+    --body-color: var(--text-color);
+    --body-background: var(--app-background);
+    width: 100%;
+    color: var(--body-color);
+    background: var(--body-background);
+    font-family: var(--body-font-family);
+    margin: 0;
+  }
+
 }
 
 h1 {
   @include app.H1-text-style;
-  margin: app.space(base) app.space(none);
-  color: var(--body-color);
+
+  & {
+    margin: app.space(base) app.space(none);
+    color: var(--body-color);
+  }
 }
 
 h2 {
   @include app.H2-text-style;
-  margin: app.space(bit-tight) app.space(none);
-  color: var(--body-color);
+
+  & {
+    margin: app.space(bit-tight) app.space(none);
+    color: var(--body-color);
+  }
 }
 
 h3 {
   @include app.H3-text-style;
-  margin: app.space(tight) app.space(none);
-  color: var(--body-color);
+
+  & {
+    margin: app.space(tight) app.space(none);
+    color: var(--body-color);
+  }
 }
 
 h4 {
   @include app.H4-text-style;
-  margin: app.space(extra-tight) app.space(none);
-  color: var(--body-color);
+
+  & {
+    margin: app.space(extra-tight) app.space(none);
+    color: var(--body-color);
+  }
 }
 
 h5 {
   @include app.H5-text-style;
-  margin: app.space(extra-tight) app.space(none);
-  color: var(--body-color);
+
+  & {
+    margin: app.space(extra-tight) app.space(none);
+    color: var(--body-color);
+  }
 }
 
 h6 {
   @include app.H6-text-style;
-  margin: app.space(super-tight) app.space(none);
-  color: var(--body-color);
+
+  & {
+    margin: app.space(super-tight) app.space(none);
+    color: var(--body-color);
+  }
 }
 
 p {
   @include app.body1-text-style;
-  max-width: #{app.$max-width};
+
+  & {
+    max-width: #{app.$max-width};
+  }
 }
 
 a,
@@ -184,10 +209,13 @@ a:visited,
 a:focus,
 a:hover,
 a:active {
-  text-decoration: none;
-  outline: 0;
-  cursor: pointer;
   @include app.link-text-style;
+
+  & {
+    text-decoration: none;
+    outline: 0;
+    cursor: pointer;
+  }
 }
 
 button,
@@ -261,18 +289,21 @@ blockquote {
   position: relative;
 
   &::after {
-    content: '"';
-    color: var(--blockquote);
-    padding-right: app.space(bit-tight);
     @include app.H1-text-style;
-    line-height: 1;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: auto;
-    display: flex;
-    align-items: center;
+
+    & {
+      content: '"';
+      color: var(--blockquote);
+      padding-right: app.space(bit-tight);
+      line-height: 1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: auto;
+      display: flex;
+      align-items: center;
+    }
   }
 
   >p {
@@ -327,17 +358,20 @@ pre {
   white-space: pre-wrap;
 
   &::after {
-    content: '</>';
-    padding-left: app.space(bit-tight);
-    transform: translate(0%, -100%);
     @include app.H4-text-style;
-    line-height: 1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: auto;
-    display: flex;
-    align-items: center;
+
+    & {
+      content: '</>';
+      padding-left: app.space(bit-tight);
+      transform: translate(0%, -100%);
+      line-height: 1;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: auto;
+      display: flex;
+      align-items: center;
+    }
   }
 }
 
@@ -427,11 +461,14 @@ table.table {
   }
 
   >thead>tr>th {
-    vertical-align: bottom;
-    color: var(--table-head);
     @include app.H6-text-style;
-    background-color: var(--table-head-background);
-    border-bottom: 2px solid var(--table-border);
+
+    & {
+      vertical-align: bottom;
+      color: var(--table-head);
+      background-color: var(--table-head-background);
+      border-bottom: 2px solid var(--table-border);
+    }
 
     &:first-of-type {
       border-radius: 0.5rem 0 0 0;
